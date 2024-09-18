@@ -1,8 +1,12 @@
 package com.northcoders.recordshopapplication.model;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
-public class Album {
+import com.google.gson.annotations.SerializedName;
+import com.northcoders.recordshopapplication.BR;
+
+public class Album extends BaseObservable {
     @SerializedName("album_id")
     private int album_id;
 
@@ -37,59 +41,73 @@ public class Album {
     public Album() {
     }
 
+    @Bindable
     public int getAlbum_id() {
         return album_id;
     }
 
     public void setAlbum_id(int album_id) {
         this.album_id = album_id;
+        notifyPropertyChanged(BR.album_id);
     }
 
+    @Bindable
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+        notifyPropertyChanged(BR.title);
     }
 
+    @Bindable
     public int getStock() {
         return stock;
     }
 
     public void setStock(int stock) {
         this.stock = stock;
+        notifyPropertyChanged(BR.stock);
     }
 
+    @Bindable
     public String getReleaseDate() {
         return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+        notifyPropertyChanged(BR.releaseDate);
     }
 
+    @Bindable
     public int getSales() {
         return sales;
     }
 
     public void setSales(int sales) {
         this.sales = sales;
+        notifyPropertyChanged(BR.sales);
     }
 
+    @Bindable
     public String getGenre() {
         return genre;
     }
 
     public void setGenre(String genre) {
         this.genre = genre;
+        notifyPropertyChanged(BR.genre);
     }
 
+    @Bindable
     public Artist getArtist() {
         return artist;
     }
 
     public void setArtist(Artist artist) {
         this.artist = artist;
+        notifyPropertyChanged(BR.artist);
     }
 }
