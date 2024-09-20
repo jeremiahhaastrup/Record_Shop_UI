@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-    AlbumRepository albumRepository;
+    private AlbumRepository albumRepository;
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
@@ -22,5 +22,9 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public LiveData<List<Album>> getAllAlbums() {
         return albumRepository.getMutableLiveData();
+    }
+
+    public void addAlbum(Album album) {
+        albumRepository.addAlbum(album);
     }
 }
