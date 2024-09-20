@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="album"
+            type="com.northcoders.recordshopapplication.model.Album" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.addAlbum.AddNewAlbumActivity"
+        android:background="@color/light_black"
+        android:padding="15sp"
+        >
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/red"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@android:color/transparent"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+        <ImageView
+            android:id="@+id/addAlbumCoverView"
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:contentDescription="@{@string/albumCover(album.title)}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="50sp"
+            app:srcCompat="@drawable/ic_launcher_background"
+            />
+
+        <Button
+            android:id="@+id/changeAlbumCoverView"
+            android:text="@string/change_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addAlbumCoverView"
+            android:layout_marginTop="5sp"
+            tools:text="Change Image"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@android:color/transparent"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+        <TextView
+            android:id="@+id/albumTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/changeAlbumCoverView"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="40sp"
+            android:layout_marginBottom="5sp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/albumTitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumTitleLabel"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="10sp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@{album.title}"
+            tools:text="ALBUM NAME"
+
+            />
+
+        <TextView
+            android:id="@+id/albumReleaseDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/release_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumTitleView"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginBottom="5sp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/albumReleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumReleaseDateLabel"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@{album.releaseDate}"
+            tools:text="RELEASE DATE"
+            />
+
+        <TextView
+            android:id="@+id/albumGenreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/genre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumReleaseDate"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginBottom="5sp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/albumGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumGenreLabel"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@{album.genre}"
+            tools:text="Genre"
+            />
+
+        <TextView
+            android:id="@+id/albumStockLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stock_available"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumGenre"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginBottom="5sp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/albumStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumStockLabel"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"
+            android:text="@{album.stock}"
+            tools:text="STOCK"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/albumArtistLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/artist"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumStock"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginStart="10sp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/albumArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumArtistLabel"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@{album.artist.name}"
+            tools:text="ARTIST"
+            />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/submit_album_button"
+            android:text="@string/submit"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="40sp"
+            android:layout_marginEnd="40sp"
+            android:backgroundTint="@color/green"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
