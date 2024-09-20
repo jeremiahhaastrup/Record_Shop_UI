@@ -33,6 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:background="@android:color/transparent"
             style="?android:attr/borderlessButtonStyle"
+            android:onClick="@{clickHandler::onBackBtnClicker}"
             />
 
         <ImageView
@@ -226,6 +227,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="40sp"
             android:backgroundTint="@color/green"
+            android:onClick="@{clickHandler::onSubmitAlbumBtnClicker}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
