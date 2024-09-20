@@ -9,6 +9,9 @@
         <variable
             name="album"
             type="com.northcoders.recordshopapplication.model.Album" />
+        <variable
+            name="clickHandler"
+            type="com.northcoders.recordshopapplication.ui.addAlbum.AddAlbumClickHandlers" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,12 +95,41 @@
             />
 
         <TextView
+            android:id="@+id/albumArtistLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/artist"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumTitleView"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginStart="10sp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/albumArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumArtistLabel"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="10sp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@{album.artist.name}"
+            tools:text="ARTIST"
+            />
+
+        <TextView
             android:id="@+id/albumReleaseDateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/release_date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/albumTitleView"
+            app:layout_constraintTop_toBottomOf="@+id/albumArtist"
             android:layout_marginTop="20sp"
             android:layout_marginStart="10sp"
             android:layout_marginBottom="5sp"
@@ -106,18 +138,19 @@
             android:textColor="@color/white"
             />
 
-        <TextView
+        <EditText
             android:id="@+id/albumReleaseDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/albumReleaseDateLabel"
             android:layout_marginTop="10sp"
-            android:layout_marginStart="10sp"
-            android:textSize="20sp"
+            android:layout_marginStart="6sp"
+            android:textSize="15sp"
+            android:inputType="date"
             android:textColor="@color/white"
             android:text="@{album.releaseDate}"
-            tools:text="RELEASE DATE"
+            tools:text="Select Album Release Date"
             />
 
         <TextView
@@ -146,7 +179,7 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:text="@{album.genre}"
-            tools:text="Genre"
+            tools:text="GENRE"
             />
 
         <TextView
@@ -164,61 +197,34 @@
             android:textColor="@color/white"
             />
 
-        <TextView
+        <EditText
             android:id="@+id/albumStock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autofillHints="1000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/albumStockLabel"
             android:layout_marginTop="10sp"
-            android:layout_marginStart="10sp"
+            android:layout_marginStart="6sp"
             android:textSize="20sp"
-            android:text="@{album.stock}"
-            tools:text="STOCK"
+            android:inputType="number"
+            android:ems="5"
+            android:text="@{`` + album.stock}"
             android:textColor="@color/white"
-            />
-
-        <TextView
-            android:id="@+id/albumArtistLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/artist"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/albumStock"
-            android:layout_marginTop="20sp"
-            android:layout_marginBottom="5sp"
-            android:layout_marginStart="10sp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textColor="@color/white"
-            />
-
-        <TextView
-            android:id="@+id/albumArtist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/albumArtistLabel"
-            android:layout_marginTop="10sp"
-            android:layout_marginStart="10sp"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:text="@{album.artist.name}"
-            tools:text="ARTIST"
             />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/submitAlbumButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/submit_album_button"
-            android:text="@string/submit"
+            android:text="@string/create"
             android:textStyle="bold"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="40sp"
-            android:layout_marginEnd="40sp"
             android:backgroundTint="@color/green"
             />
 
