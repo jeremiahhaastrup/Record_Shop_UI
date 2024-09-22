@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.northcoders.recordshopapplication.model.Album;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityViewModel;
 
 public class AddAlbumClickHandlers {
@@ -23,6 +24,7 @@ public class AddAlbumClickHandlers {
     public void onSubmitAlbumBtnClicker(View view) {
 
         String stockString = String.valueOf(album.getStock());
+
         if (album.getTitle() == null) {
             Toast.makeText(context, "Album Title Cannot Be Empty", Toast.LENGTH_SHORT).show();
         } else if (album.getArtist() == null) {
@@ -36,7 +38,7 @@ public class AddAlbumClickHandlers {
         } else if (stockString.trim().isEmpty()) {
             Toast.makeText(context, "Album Stock Cannot Be Empty", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(context, MainActivityViewModel.class);
+            Intent intent = new Intent(view.getContext(), MainActivityViewModel.class);
             Album newAlbum = new Album(
                     album.getAlbum_id(),
                     album.getStock(),
@@ -55,7 +57,7 @@ public class AddAlbumClickHandlers {
     }
 
     public void onBackBtnClicker(View view) {
-        Intent intent = new Intent(context, MainActivityViewModel.class);
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
         context.startActivity(intent);
 
     }
