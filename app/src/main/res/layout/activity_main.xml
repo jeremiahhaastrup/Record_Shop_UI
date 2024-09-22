@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+    <data>
+        <variable
+            name="addAlbumHandler"
+            type="com.northcoders.recordshopapplication.ui.mainactivity.MainActivityClickHandler" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
@@ -23,6 +28,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addAlbumButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add_an_album"
+            android:text=""
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40sp"
+            android:layout_marginBottom="40sp"
+            android:backgroundTint="@color/green"
+            android:src="@drawable/baseline_add_24"
+            android:onClick="@{addAlbumHandler::onFABClicked}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
