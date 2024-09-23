@@ -1,6 +1,7 @@
 package com.northcoders.recordshopapplication.service;
 
 import com.northcoders.recordshopapplication.model.Album;
+import com.northcoders.recordshopapplication.model.Artist;
 
 import java.util.List;
 
@@ -16,4 +17,10 @@ public interface AlbumApiService {
 
     @POST("/api/v1/albums")
     Call<Album> addAlbum(@Body Album album);
+
+
+
+    @GET("/api/v1/artists")
+    Call<List<Artist>> getAllArtists();
+
 }
