@@ -7,30 +7,26 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityAddNewAlbumBinding;
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityViewModel;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 
-import java.util.ArrayList;
+import java.util.Calendar;
+
 
 public class AddNewAlbumActivity extends AppCompatActivity {
 
@@ -39,9 +35,7 @@ public class AddNewAlbumActivity extends AppCompatActivity {
     private Album album;
 
     private TextView releaseDateText;
-
-    private TextView genreText;
-    private Dialog genreDialog;
+    private Button releaseDateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +46,14 @@ public class AddNewAlbumActivity extends AppCompatActivity {
 
         activityAddNewAlbumBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_album);
 
-        MainActivityViewModel model = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        MainActivityAlbumViewModel model = new ViewModelProvider(this).get(MainActivityAlbumViewModel.class);
 
         addAlbumClickHandlers = new AddAlbumClickHandlers(album, this, model);
         activityAddNewAlbumBinding.setAlbum(album);
         activityAddNewAlbumBinding.setClickHandler(addAlbumClickHandlers);
 
         releaseDateText = findViewById(R.id.albumReleaseDate);
-        Button releaseDateButton = findViewById(R.id.addReleaseDateButton);
+        releaseDateButton = findViewById(R.id.albumReleaseDateButton);
 
         releaseDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,57 +61,12 @@ public class AddNewAlbumActivity extends AppCompatActivity {
                 openDatePickerDialog();
             }
         });
-
-        genreText = findViewById(R.id.albumGenre);
-
-        genreText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                genreDialog = new Dialog(AddNewAlbumActivity.this);
-                genreDialog.setContentView(R.layout.genre_searchable_spinner);
-                genreDialog.show();
-
-                EditText genreEditText = genreDialog.findViewById(R.id.genreEditText);
-                ListView genreListView = genreDialog.findViewById(R.id.genreListView);
-
-                Resources res = getResources();
-                String[] genres = res.getStringArray(R.array.genres);
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                        AddNewAlbumActivity.this,
-                        R.layout.genre_list_item,
-                        R.id.genreTextView,
-                        genres
-                );
-
-                genreListView.setAdapter(adapter);
-
-                genreEditText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        adapter.getFilter().filter(s);
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
-                });
-                genreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        genreText.setText(adapter.getItem(position));
-                        genreDialog.dismiss();
-                    }
-                });
-            }
-        });
  }
+
+    Calendar calendar = Calendar.getInstance();
+    int mYear = calendar.get(Calendar.YEAR);
+    int mMonth = calendar.get(Calendar.MONTH);
+    int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
     private void openDatePickerDialog() {
         DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
@@ -125,7 +74,7 @@ public class AddNewAlbumActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 releaseDateText.setText(String.format("%s/%s/%s", dayOfMonth, month + 1, year));
             }
-        }, 2024, 0, 1);
+        }, mYear, mMonth, mDay);
         dialog.show();
     }
 }
