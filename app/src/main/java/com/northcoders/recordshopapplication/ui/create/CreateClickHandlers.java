@@ -1,4 +1,4 @@
-package com.northcoders.recordshopapplication.ui.addAlbum;
+package com.northcoders.recordshopapplication.ui.create;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,16 +6,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbums;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 
-public class AddAlbumClickHandlers {
+public class CreateClickHandlers {
 
     private Album album;
     private Context context;
     private MainActivityAlbumViewModel mainActivityAlbumViewModel;
 
-    public AddAlbumClickHandlers(Album album, Context context, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
+    public CreateClickHandlers(Album album, Context context, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
         this.album = album;
         this.context = context;
         this.mainActivityAlbumViewModel = mainActivityAlbumViewModel;
@@ -58,7 +58,7 @@ public class AddAlbumClickHandlers {
     }
 
     public void onBackBtnClicker(View view) {
-        Intent intent = new Intent(view.getContext(), MainActivityAlbums.class);
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
         context.startActivity(intent);
 
     }

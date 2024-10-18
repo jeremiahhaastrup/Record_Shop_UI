@@ -18,7 +18,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityMainBinding;
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.addAlbum.AddActivity;
+import com.northcoders.recordshopapplication.ui.create.CreateActivity;
 import com.northcoders.recordshopapplication.ui.library.LibraryActivity;
 import com.northcoders.recordshopapplication.ui.search.SearchActivity;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 } else if (id == R.id.create) {
-                    intent = new Intent(MainActivity.this, AddActivity.class);
+                    intent = new Intent(MainActivity.this, CreateActivity.class);
                     startActivity(intent);
                     return true;
                 } else if (id == R.id.library) {

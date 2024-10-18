@@ -15,14 +15,14 @@
             type="com.northcoders.recordshopapplication.model.Artist" />
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.addAlbum.AddClickHandlers" />
+            type="com.northcoders.recordshopapplication.ui.create.AddClickHandlers" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.addAlbum.AddActivity"
+        tools:context=".ui.create.AddActivity"
         android:background="@color/light_black"
         android:padding="15sp"
         android:fitsSystemWindows="true"

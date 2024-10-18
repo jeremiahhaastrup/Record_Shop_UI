@@ -1,4 +1,4 @@
-package com.northcoders.recordshopapplication.ui.addAlbum;
+package com.northcoders.recordshopapplication.ui.create;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.northcoders.recordshopapplication.R;
-import com.northcoders.recordshopapplication.databinding.ActivityAddBinding;
+import com.northcoders.recordshopapplication.databinding.ActivityCreateBinding;
 import com.northcoders.recordshopapplication.model.Album;
 import com.northcoders.recordshopapplication.ui.search.SearchActivity;
 import com.northcoders.recordshopapplication.ui.library.LibraryActivity;
@@ -30,10 +30,10 @@ import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumVi
 import java.util.Calendar;
 
 
-public class AddActivity extends AppCompatActivity {
+public class CreateActivity extends AppCompatActivity {
 
-    private ActivityAddBinding activityAddBinding;
-    private AddClickHandlers addClickHandlers;
+    private ActivityCreateBinding activityCreateBinding;
+    private CreateClickHandlers createClickHandlers;
     private Album album;
 
     private TextView releaseDateText;
@@ -44,18 +44,18 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_create);
         EdgeToEdge.enable(this);
 
         album = new Album();
 
-        activityAddBinding = DataBindingUtil.setContentView(this, R.layout.activity_add);
+        activityCreateBinding = DataBindingUtil.setContentView(this, R.layout.activity_create);
 
         MainActivityAlbumViewModel model = new ViewModelProvider(this).get(MainActivityAlbumViewModel.class);
 
-        addClickHandlers = new AddClickHandlers(album, this, model);
-        activityAddBinding.setAlbum(album);
-        activityAddBinding.setClickHandler(addClickHandlers);
+        createClickHandlers = new CreateClickHandlers(album, this, model);
+        activityCreateBinding.setAlbum(album);
+        activityCreateBinding.setClickHandler(createClickHandlers);
 
         releaseDateText = findViewById(R.id.albumReleaseDate);
         releaseDateButton = findViewById(R.id.albumReleaseDateButton);
@@ -69,7 +69,7 @@ public class AddActivity extends AppCompatActivity {
 
         initialiseGenreDropdownMenu();
 
-        bottomNavigationView = activityAddBinding.bottomNavigationCreate;
+        bottomNavigationView = activityCreateBinding.bottomNavigationCreate;
         bottomNavigationView.setSelectedItemId(R.id.create);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -82,15 +82,15 @@ public class AddActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.homeView) {
-                    intent = new Intent(AddActivity.this, MainActivity.class);
+                    intent = new Intent(CreateActivity.this, MainActivity.class);
                     startActivity(intent);
                     return true;
                 } else if (id == R.id.search) {
-                    intent = new Intent(AddActivity.this, SearchActivity.class);
+                    intent = new Intent(CreateActivity.this, SearchActivity.class);
                     startActivity(intent);
                     return true;
                 } else if (id == R.id.library) {
-                    intent = new Intent(AddActivity.this, LibraryActivity.class);
+                    intent = new Intent(CreateActivity.this, LibraryActivity.class);
                     startActivity(intent);
                     return true;
                 } else return id == R.id.create;
@@ -99,7 +99,7 @@ public class AddActivity extends AppCompatActivity {
  }
 
     private void initialiseGenreDropdownMenu() {
-        genreDropdownMenu = activityAddBinding.genreDropdown;
+        genreDropdownMenu = activityCreateBinding.genreDropdown;
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
