@@ -1,20 +1,13 @@
 package com.northcoders.recordshopapplication.ui.addAlbum;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -28,7 +21,7 @@ import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumVi
 import java.util.Calendar;
 
 
-public class AddNewAlbumActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
 
     private ActivityAddNewAlbumBinding activityAddNewAlbumBinding;
     private AddAlbumClickHandlers addAlbumClickHandlers;
@@ -36,6 +29,7 @@ public class AddNewAlbumActivity extends AppCompatActivity {
 
     private TextView releaseDateText;
     private Button releaseDateButton;
+    private AutoCompleteTextView genreDropdownMenu, artistDropdownMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +55,38 @@ public class AddNewAlbumActivity extends AppCompatActivity {
                 openDatePickerDialog();
             }
         });
+
+        initialiseGenreDropdownMenu();
+//        initialiseArtistDropdownMenu();
  }
+
+    private void initialiseGenreDropdownMenu() {
+        genreDropdownMenu = activityAddNewAlbumBinding.genreDropdown;
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.genres,
+                android.R.layout.simple_spinner_item
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genreDropdownMenu.setAdapter(adapter);
+        genreDropdownMenu.setThreshold(1);
+    }
+
+//    private void initialiseArtistDropdownMenu() {
+//        artistDropdownMenu = activityAddNewAlbumBinding.artistDropdown;
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+//                this,
+//                R.array.genres,
+//                android.R.layout.simple_spinner_item
+//        );
+//
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        artistDropdownMenu.setAdapter(adapter);
+//        artistDropdownMenu.setThreshold(1);
+//    }
 
     Calendar calendar = Calendar.getInstance();
     int mYear = calendar.get(Calendar.YEAR);

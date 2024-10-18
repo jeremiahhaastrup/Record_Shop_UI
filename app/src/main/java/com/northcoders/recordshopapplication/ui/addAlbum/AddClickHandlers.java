@@ -6,19 +6,19 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
-import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityViewModel;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbums;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 
 public class AddAlbumClickHandlers {
 
     private Album album;
     private Context context;
-    private MainActivityViewModel mainActivityViewModel;
+    private MainActivityAlbumViewModel mainActivityAlbumViewModel;
 
-    public AddAlbumClickHandlers(Album album, Context context, MainActivityViewModel mainActivityViewModel) {
+    public AddAlbumClickHandlers(Album album, Context context, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
         this.album = album;
         this.context = context;
-        this.mainActivityViewModel = mainActivityViewModel;
+        this.mainActivityAlbumViewModel = mainActivityAlbumViewModel;
     }
 
     public void onSubmitAlbumBtnClicker(View view) {
@@ -38,18 +38,19 @@ public class AddAlbumClickHandlers {
         } else if (stockString.trim().isEmpty()) {
             Toast.makeText(context, "Album Stock Cannot Be Empty", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(view.getContext(), MainActivityViewModel.class);
+            Intent intent = new Intent(view.getContext(), MainActivityAlbumViewModel.class);
             Album newAlbum = new Album(
                     album.getAlbum_id(),
                     album.getStock(),
                     album.getTitle(),
                     0,
+                    album.getImageUrl(),
                     album.getReleaseDate(),
                     album.getArtist(),
                     album.getGenre()
             );
 
-            mainActivityViewModel.addAlbum(newAlbum);
+            mainActivityAlbumViewModel.addAlbum(newAlbum);
             context.startActivity(intent);
         }
 
@@ -57,7 +58,7 @@ public class AddAlbumClickHandlers {
     }
 
     public void onBackBtnClicker(View view) {
-        Intent intent = new Intent(view.getContext(), MainActivity.class);
+        Intent intent = new Intent(view.getContext(), MainActivityAlbums.class);
         context.startActivity(intent);
 
     }

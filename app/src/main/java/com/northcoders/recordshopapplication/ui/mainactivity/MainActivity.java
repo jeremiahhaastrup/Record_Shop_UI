@@ -17,12 +17,12 @@ import com.northcoders.recordshopapplication.model.Album;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityAlbums extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<Album> albums;
     private AlbumAdapter albumAdapter;
-    private MainActivityViewModel mainActivityViewModel;
+    private MainActivityAlbumViewModel mainActivityAlbumViewModel;
     private ActivityMainBinding activityMainBinding;
     private MainActivityClickHandler mainActivityClickHandler;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        mainActivityAlbumViewModel = new ViewModelProvider(this).get(MainActivityAlbumViewModel.class);
         mainActivityClickHandler = new MainActivityClickHandler(this);
         activityMainBinding.setAddAlbumHandler(mainActivityClickHandler);
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getAllAlbums() {
-        mainActivityViewModel.getAllAlbums().observe(this, new Observer<List<Album>>() {
+        mainActivityAlbumViewModel.getAllAlbums().observe(this, new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albumsFromLiveData) {
                 albums = (ArrayList<Album>) albumsFromLiveData;
