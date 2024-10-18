@@ -11,11 +11,11 @@ import com.northcoders.recordshopapplication.repository.AlbumRepository;
 
 import java.util.List;
 
-public class MainActivityViewModel extends AndroidViewModel {
+public class MainActivityAlbumViewModel extends AndroidViewModel {
 
     private AlbumRepository albumRepository;
 
-    public MainActivityViewModel(@NonNull Application application) {
+    public MainActivityAlbumViewModel(@NonNull Application application) {
         super(application);
         this.albumRepository = new AlbumRepository(application);
     }

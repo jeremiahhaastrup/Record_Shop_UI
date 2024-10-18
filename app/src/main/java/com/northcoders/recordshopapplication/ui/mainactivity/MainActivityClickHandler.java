@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.northcoders.recordshopapplication.ui.addAlbum.AddNewAlbumActivity;
+import com.northcoders.recordshopapplication.ui.addAlbum.AddActivity;
 
 public class MainActivityClickHandler {
     Context context;
@@ -14,7 +14,7 @@ public class MainActivityClickHandler {
     }
 
     public void onFABClicked(View view) {
-        Intent intent = new Intent(view.getContext(), AddNewAlbumActivity.class);
+        Intent intent = new Intent(view.getContext(), AddActivity.class);
         context.startActivity(intent);
     }
 }
