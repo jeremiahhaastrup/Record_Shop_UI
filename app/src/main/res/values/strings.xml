@@ -10,5 +10,12 @@
     <string name="artist">Artist</string>
     <string name="stock_available">Stock Available</string>
     <string name="submit_album_button">Submit Album Button</string>
-    <string name="submit">Submit</string>
+    <string name="create">CREATE</string>
+    <string name="add_an_album">add an album</string>
+    <string name="select">Select</string>
+    <string name="stock_availble_edit_view_number">100</string>
+    <string name="select_date">Select Date</string>
+    <string name="stock">Stock</string>
+    <string name="list_of_genres">List of genres</string>
+    <string name="list_of_artists">List of Artists</string>
 </resources>
