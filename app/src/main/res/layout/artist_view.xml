@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="20sp"
         android:paddingBottom="20sp"
-        android:background="@color/black"
         >
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -35,7 +34,7 @@
 
         <TextView
             android:id="@+id/placeOfBirthView"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:text="@{artist.name}"
             tools:text="NAME"
@@ -46,11 +45,15 @@
             android:layout_marginTop="15sp"
             android:layout_marginStart="10sp"
             android:textSize="17sp"
+            android:layout_marginEnd="100sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAllCaps="false"
             />
 
         <TextView
             android:id="@+id/artistNameView"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:text="@{artist.placeOfBirth}"
             tools:text="ARTIST PLACE OF BIRTH"
@@ -60,6 +63,10 @@
             android:layout_marginTop="5sp"
             android:layout_marginStart="10sp"
             android:textSize="14sp"
+            android:layout_marginEnd="100sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAllCaps="false"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
