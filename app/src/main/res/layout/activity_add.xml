@@ -15,7 +15,7 @@
             type="com.northcoders.recordshopapplication.model.Artist" />
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.addAlbum.AddAlbumClickHandlers" />
+            type="com.northcoders.recordshopapplication.ui.addAlbum.AddClickHandlers" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -117,7 +117,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title_layout"
                 app:hintTextColor="@color/white"
                 android:textColorHint="@color/white"
-                app:hintTextAppearance="@color/white"
+                app:hintTextAppearance="@style/CustomHintTextAppearance"
                 app:boxStrokeColor="@color/text_input_layout_stroke_color_selector"
                 >
 
@@ -173,7 +173,7 @@
                 app:layout_constraintTop_toBottomOf="@id/release_date_layout"
                 app:hintTextColor="@color/white"
                 android:textColorHint="@color/white"
-                app:hintTextAppearance="@color/white"
+                app:hintTextAppearance="@style/CustomHintTextAppearance"
                 app:boxStrokeColor="@color/text_input_layout_stroke_color_selector"
                 >
 
@@ -215,7 +215,7 @@
             android:contentDescription="@string/submit_album_button"
             android:text="@string/create"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationCreate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="10dp"
@@ -225,7 +225,7 @@
             />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigation"
+                android:id="@+id/bottomNavigationCreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -233,18 +233,6 @@
                 app:labelVisibilityMode="labeled"
                 style="@style/CustomBottomNavigationView"
                 />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-                >
-
-            </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
