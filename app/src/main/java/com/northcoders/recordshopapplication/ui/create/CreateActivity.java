@@ -68,6 +68,7 @@ public class CreateActivity extends AppCompatActivity {
         });
 
         initialiseGenreDropdownMenu();
+//        initialiseArtistDropdownMenu();
 
         bottomNavigationView = activityCreateBinding.bottomNavigationCreate;
         bottomNavigationView.setSelectedItemId(R.id.create);
@@ -111,6 +112,20 @@ public class CreateActivity extends AppCompatActivity {
         genreDropdownMenu.setAdapter(adapter);
         genreDropdownMenu.setThreshold(1);
     }
+
+//    private void initialiseArtistDropdownMenu() {
+//        artistDropdownMenu = activityAddNewAlbumBinding.artistDropdown;
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+//                this,
+//                R.array.genres,
+//                android.R.layout.simple_spinner_item
+//        );
+//
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        artistDropdownMenu.setAdapter(adapter);
+//        artistDropdownMenu.setThreshold(1);
+//    }
 
     Calendar calendar = Calendar.getInstance();
     int mYear = calendar.get(Calendar.YEAR);
