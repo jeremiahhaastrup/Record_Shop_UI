@@ -1,7 +1,7 @@
 
 # The Record Shop
 
-An Android application designed to manage a music record store, providing a smooth user experience for adding, updating, and deleting albums and artists. The app interfaces with the [Record Shop API](https://github.com/jeremiahhaastrup/Record-Shop-API) to handle data storage and retrieval, offering real-time updates for artists and album collections.
+An Android application designed to manage a music record store, providing a smooth user experience for adding, updating, and deleting albums and artists. The app interfaces with the [Record Shop API](https://github.com/jeremiahhaastrup/Record_Shop_API) to handle data storage and retrieval, offering real-time updates for artists and album collections.
 
 ## Features
 - **Album Management**:
