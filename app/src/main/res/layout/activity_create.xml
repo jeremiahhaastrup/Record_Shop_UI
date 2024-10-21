@@ -15,14 +15,14 @@
             type="com.northcoders.recordshopapplication.model.Artist" />
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.create.AddClickHandlers" />
+            type="com.northcoders.recordshopapplication.ui.create.CreateClickHandlers" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.create.AddActivity"
+        tools:context=".ui.create.CreateActivity"
         android:background="@color/light_black"
         android:padding="15sp"
         android:fitsSystemWindows="true"
@@ -172,7 +172,6 @@
                             android:hint="@string/release_date"
                             android:paddingHorizontal="32dp"
                             android:paddingVertical="15dp"
-                            app:layout_constraintTop_toBottomOf="@id/artist_layout"
                             app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -203,7 +202,6 @@
                             android:hint="@string/genre"
                             android:paddingHorizontal="32dp"
                             android:paddingVertical="15dp"
-                            app:layout_constraintTop_toBottomOf="@id/release_date_layout"
                             app:hintTextColor="@color/white"
                             android:textColorHint="@color/white"
                             app:hintTextAppearance="@style/CustomHintTextAppearance"
@@ -230,7 +228,6 @@
                             android:hint="@string/stock"
                             android:paddingHorizontal="32dp"
                             android:paddingVertical="15dp"
-                            app:layout_constraintTop_toBottomOf="@id/genre_layout"
                             app:hintTextColor="@color/white"
                             app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
 
