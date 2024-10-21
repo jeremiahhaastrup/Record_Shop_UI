@@ -1,5 +1,7 @@
 package com.northcoders.recordshopapplication.service;
 
+import com.northcoders.recordshopapplication.BuildConfig;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -8,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInstance {
 
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "http://record-shop-env.eba-gcpj2isn.eu-west-2.elasticbeanstalk.com/api/v1/";
+    private static final String BASE_URL = BuildConfig.API_URL;
 
     public static AlbumApiService getService() {
 
