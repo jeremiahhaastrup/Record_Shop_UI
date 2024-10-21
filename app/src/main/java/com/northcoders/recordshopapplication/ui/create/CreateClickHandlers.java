@@ -45,6 +45,7 @@ public class CreateClickHandlers {
                     album.getTitle(),
                     0,
                     album.getImageUrl(),
+                    album.getDescription(),
                     album.getReleaseDate(),
                     album.getArtist(),
                     album.getGenre()
