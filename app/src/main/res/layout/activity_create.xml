@@ -286,6 +286,150 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/artistLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        >
+
+                        <ImageView
+                            android:id="@+id/addArtistImageView"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:maxWidth="200dp"
+                            android:maxHeight="200dp"
+                            android:minWidth="200dp"
+                            android:minHeight="200dp"
+                            android:contentDescription="@{@string/image(artist.name)}"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="50dp"
+                            android:src="@{artist.imageUrl}"
+                            app:srcCompat="@drawable/ic_launcher_background"
+                            />
+
+                        <Button
+                            android:id="@+id/changeArtistImageView"
+                            android:text="@string/change_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5sp"
+                            tools:text="Change Image"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:background="@android:color/transparent"
+                            style="?android:attr/borderlessButtonStyle"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/artistName_layout"
+                            style="@style/CustomTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/name"
+                            android:paddingHorizontal="32dp"
+                            android:paddingVertical="15dp"
+                            app:hintTextColor="@color/white"
+                            app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/artistName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@={artist.name}"
+                                android:textColor="@color/white"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/dateOfBirth_layout"
+                            style="@style/CustomTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/date_of_birth"
+                            android:paddingHorizontal="32dp"
+                            android:paddingVertical="15dp"
+                            app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/artistDateOfBirth"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date"
+                                android:focusable="false"
+                                android:text="@={artist.dateOfBirth}"
+                                android:textColor="@color/white"/>
+
+                            <Button
+                                android:id="@+id/artistDateOfBirthButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:text="@string/select_date"
+                                android:layout_marginTop="5sp"
+                                style="@style/CustomButton"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/placeOfBirth_layout"
+                            style="@style/CustomTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/place_of_birth"
+                            android:paddingHorizontal="32dp"
+                            android:paddingVertical="15dp"
+                            app:hintTextColor="@color/white"
+                            app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/artistPlaceOfBirth"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@={artist.placeOfBirth}"
+                                android:textColor="@color/white"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/biography_layout"
+                            style="@style/CustomTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/biography"
+                            android:paddingHorizontal="32dp"
+                            android:paddingVertical="15dp"
+                            app:hintTextColor="@color/white"
+                            app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/artistBiography"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@={artist.biography}"
+                                android:textColor="@color/white"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/submitArtistButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/submit_album_button"
+                            android:text="@string/create"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="15dp"
+                            android:layout_marginTop="10dp"
+                            android:backgroundTint="@color/green"
+                            android:textColor="@color/white"
+                            />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
 
