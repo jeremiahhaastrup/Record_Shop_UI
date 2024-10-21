@@ -164,6 +164,26 @@
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/description_layout"
+                        style="@style/CustomTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/description"
+                        android:paddingHorizontal="32dp"
+                        android:paddingVertical="15dp"
+                        app:hintTextColor="@color/white"
+                        app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/albumDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={album.description}"
+                            android:textColor="@color/white"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/release_date_layout"
                             style="@style/CustomTextInputLayout"

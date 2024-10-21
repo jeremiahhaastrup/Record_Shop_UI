@@ -18,4 +18,5 @@
     <string name="stock">Stock</string>
     <string name="list_of_genres">List of genres</string>
     <string name="list_of_artists">List of Artists</string>
+    <string name="description">Description</string>
 </resources>
