@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,6 +16,7 @@ import android.widget.DatePicker;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -40,6 +43,8 @@ public class CreateActivity extends AppCompatActivity {
     private Button releaseDateButton;
     private AutoCompleteTextView genreDropdownMenu, artistDropdownMenu;
     private BottomNavigationView bottomNavigationView;
+    private LinearLayout albumLayout, artistLayout;
+    private SwitchCompat switchCompat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +55,11 @@ public class CreateActivity extends AppCompatActivity {
         album = new Album();
 
         activityCreateBinding = DataBindingUtil.setContentView(this, R.layout.activity_create);
-
         MainActivityAlbumViewModel model = new ViewModelProvider(this).get(MainActivityAlbumViewModel.class);
+
+        albumLayout = activityCreateBinding.albumLayout;
+        artistLayout = activityCreateBinding.artistInfoLayout;
+        switchCompat = activityCreateBinding.switchCompat;
 
         createClickHandlers = new CreateClickHandlers(album, this, model);
         activityCreateBinding.setAlbum(album);
@@ -67,6 +75,7 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+        handleToggleBetweenLayouts();
         initialiseGenreDropdownMenu();
 //        initialiseArtistDropdownMenu();
 
@@ -140,5 +149,22 @@ public class CreateActivity extends AppCompatActivity {
             }
         }, mYear, mMonth, mDay);
         dialog.show();
+    }
+
+    private void handleToggleBetweenLayouts() {
+        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    artistLayout.setVisibility(View.VISIBLE);
+                    albumLayout.setVisibility(View.GONE);
+                    switchCompat.setText("Create An Artist   ");
+                } else {
+                    artistLayout.setVisibility(View.GONE);
+                    albumLayout.setVisibility(View.VISIBLE);
+                    switchCompat.setText("Create An Album   ");
+                }
+            }
+        });
     }
 }
