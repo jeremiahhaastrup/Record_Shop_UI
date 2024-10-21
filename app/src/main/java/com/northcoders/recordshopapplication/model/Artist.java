@@ -17,15 +17,19 @@ public class Artist extends BaseObservable {
     @SerializedName("imageUrl")
     private String imageUrl;
 
+    @SerializedName("biography")
+    private String biography;
+
     @SerializedName("dateOfBirth")
     private String dateOfBirth;
 
     @SerializedName("placeOfBirth")
     private String placeOfBirth;
 
-    public Artist(String name, String imageUrl, int artist_id, String dateOfBirth, String placeOfBirth) {
+    public Artist(String name, String imageUrl, String biography, int artist_id, String dateOfBirth, String placeOfBirth) {
         this.name = name;
         this.imageUrl = imageUrl;
+        this.biography = biography;
         this.artist_id = artist_id;
         this.dateOfBirth = dateOfBirth;
         this.placeOfBirth = placeOfBirth;
@@ -70,8 +74,18 @@ public class Artist extends BaseObservable {
     }
 
     public void setImageUrl(String imageUrl) {
-        this.name = imageUrl;
+        this.imageUrl = imageUrl;
         notifyPropertyChanged(BR.imageUrl);
+    }
+
+    @Bindable
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+        notifyPropertyChanged(BR.biography);
     }
 
     @Bindable
