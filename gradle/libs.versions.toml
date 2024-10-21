@@ -1,7 +1,8 @@
 [versions]
-agp = "8.6.0"
+agp = "8.6.1"
 awsAndroidSdkS3 = "2.17.1"
-googleMaterial = "1.12.0"
+googleMaterial = "1.3.0-alpha03"
+googleMaterialVersion = "1.3.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -11,7 +12,7 @@ material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
 converterGson = "2.11.0"
-materialVersion = "1.13.0-alpha07"
+materialVersion = "1.12.0"
 
 [libraries]
 aws-android-sdk-s3 = { module = "com.amazonaws:aws-android-sdk-s3", version.ref = "awsAndroidSdkS3" }
@@ -24,9 +25,10 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGson" }
-material-v1120 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
-material-v1130alpha07 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
-retrofit = { module = "com.squareup.retrofit2:retrofit" }
+material-v1120 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+material-v130 = { module = "com.google.android.material:material", version.ref = "googleMaterialVersion" }
+material-v130alpha03 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
