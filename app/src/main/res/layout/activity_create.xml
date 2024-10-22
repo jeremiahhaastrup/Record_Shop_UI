@@ -49,7 +49,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:background="@android:color/transparent"
                     style="?android:attr/borderlessButtonStyle"
-                    android:onClick="@{clickHandler::onBackBtnClicker}"
+                    android:onClick="@{clickHandler::onCancelBtnClicker}"
                     android:layout_gravity="start"
                     />
 
