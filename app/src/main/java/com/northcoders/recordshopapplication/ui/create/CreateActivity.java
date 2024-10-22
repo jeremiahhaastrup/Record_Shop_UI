@@ -14,20 +14,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityCreateBinding;
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.search.SearchActivity;
-import com.northcoders.recordshopapplication.ui.library.LibraryActivity;
-import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 
 import java.util.Calendar;
@@ -42,7 +36,6 @@ public class CreateActivity extends AppCompatActivity {
     private TextView releaseDateText;
     private Button releaseDateButton;
     private AutoCompleteTextView genreDropdownMenu, artistDropdownMenu;
-    private BottomNavigationView bottomNavigationView;
     private LinearLayout albumLayout, artistLayout;
     private SwitchCompat switchCompat;
 
@@ -78,34 +71,6 @@ public class CreateActivity extends AppCompatActivity {
         handleToggleBetweenLayouts();
         initialiseGenreDropdownMenu();
 //        initialiseArtistDropdownMenu();
-
-        bottomNavigationView = activityCreateBinding.bottomNavigationCreate;
-        bottomNavigationView.setSelectedItemId(R.id.create);
-
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-
-            Intent intent;
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int id = item.getItemId();
-
-                if (id == R.id.homeView) {
-                    intent = new Intent(CreateActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    return true;
-                } else if (id == R.id.search) {
-                    intent = new Intent(CreateActivity.this, SearchActivity.class);
-                    startActivity(intent);
-                    return true;
-                } else if (id == R.id.library) {
-                    intent = new Intent(CreateActivity.this, LibraryActivity.class);
-                    startActivity(intent);
-                    return true;
-                } else return id == R.id.create;
-            }
-        });
  }
 
     private void initialiseGenreDropdownMenu() {
