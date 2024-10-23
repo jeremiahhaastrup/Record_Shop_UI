@@ -23,6 +23,7 @@
             android:maxHeight="80dp"
             android:maxWidth="80dp"
             android:layout_marginStart="20dp"
+            android:scaleType="fitCenter"
             android:contentDescription="@{@string/albumCover(album.title)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/titleView"
