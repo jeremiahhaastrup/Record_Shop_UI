@@ -1,12 +1,16 @@
 package com.northcoders.recordshopapplication.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.google.gson.annotations.SerializedName;
 import com.northcoders.recordshopapplication.BR;
 
-public class Album extends BaseObservable {
+public class Album extends BaseObservable implements Parcelable {
     @SerializedName("album_id")
     private int album_id;
 
@@ -48,6 +52,30 @@ public class Album extends BaseObservable {
 
     public Album() {
     }
+
+    protected Album(Parcel in) {
+        album_id = in.readInt();
+        title = in.readString();
+        stock = in.readInt();
+        sales = in.readInt();
+        imageUrl = in.readString();
+        description = in.readString();
+        releaseDate = in.readString();
+        genre = in.readString();
+        artist = in.readParcelable(Artist.class.getClassLoader());
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
 
     @Bindable
     public int getAlbum_id() {
@@ -137,5 +165,25 @@ public class Album extends BaseObservable {
     public void setArtist(Artist artist) {
         this.artist = artist;
         notifyPropertyChanged(BR.artist);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+//    int album_id, int stock, String title, int sales, String imageUrl, String description, String releaseDate, Artist artist, String genr
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int flags) {
+        parcel.writeInt(album_id);
+        parcel.writeInt(stock);
+        parcel.writeString(title);
+        parcel.writeInt(sales);
+        parcel.writeString(imageUrl);
+        parcel.writeString(description);
+        parcel.writeString(releaseDate);
+        parcel.writeParcelable(artist, flags);
+        parcel.writeString(genre);
     }
 }
