@@ -1,12 +1,16 @@
 package com.northcoders.recordshopapplication.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.google.gson.annotations.SerializedName;
 import com.northcoders.recordshopapplication.BR;
 
-public class Artist extends BaseObservable {
+public class Artist extends BaseObservable implements Parcelable {
 
     @SerializedName("artist_id")
     private int artist_id;
@@ -37,6 +41,27 @@ public class Artist extends BaseObservable {
 
     public Artist() {
     }
+
+    protected Artist(Parcel in) {
+        artist_id = in.readInt();
+        name = in.readString();
+        imageUrl = in.readString();
+        biography = in.readString();
+        dateOfBirth = in.readString();
+        placeOfBirth = in.readString();
+    }
+
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        @Override
+        public Artist createFromParcel(Parcel in) {
+            return new Artist(in);
+        }
+
+        @Override
+        public Artist[] newArray(int size) {
+            return new Artist[size];
+        }
+    };
 
     @Bindable
     public int getArtist_id() {
@@ -97,4 +122,20 @@ public class Artist extends BaseObservable {
         this.placeOfBirth = placeOfBirth;
         notifyPropertyChanged(BR.placeOfBirth);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int flags) {
+        parcel.writeInt(artist_id);
+        parcel.writeString(name);
+        parcel.writeString(imageUrl);
+        parcel.writeString(biography);
+        parcel.writeString(dateOfBirth);
+        parcel.writeString(placeOfBirth);
+    }
+
 }
