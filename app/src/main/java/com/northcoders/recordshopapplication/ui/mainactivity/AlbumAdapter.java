@@ -8,10 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.AlbumViewBinding;
 import com.northcoders.recordshopapplication.model.Album;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>{
@@ -22,6 +25,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public AlbumAdapter(List<Album> albumList, Context context) {
         this.albumList = albumList;
         this.context = context;
+    }
+
+    public void setAlbumFilteredList(List<Album> albumListFiltered) {
+        this.albumList = new ArrayList<>(albumListFiltered);
+        notifyDataSetChanged();
     }
 
     @NonNull
