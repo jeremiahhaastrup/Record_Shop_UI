@@ -172,8 +172,6 @@ public class Album extends BaseObservable implements Parcelable {
         return 0;
     }
 
-//    int album_id, int stock, String title, int sales, String imageUrl, String description, String releaseDate, Artist artist, String genr
-
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int flags) {
         parcel.writeInt(album_id);
