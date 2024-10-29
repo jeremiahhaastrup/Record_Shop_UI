@@ -60,7 +60,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="All"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Afrobeats"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="R&amp;B"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hip-Hop"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Jazz"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -115,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Salsa"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="House"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -137,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Drum &amp; Bass"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
                     <Space
                         android:layout_width="8dp"
@@ -148,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Classical"
-                        style="@style/BtnTextStyle"
+                        style="@style/BtnGenreStyle"
                         />
 
                 </LinearLayout>
