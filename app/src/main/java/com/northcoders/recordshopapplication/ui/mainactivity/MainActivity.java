@@ -3,6 +3,7 @@ package com.northcoders.recordshopapplication.ui.mainactivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -24,20 +25,27 @@ import com.northcoders.recordshopapplication.ui.create.CreateActivity;
 import com.northcoders.recordshopapplication.ui.library.LibraryActivity;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ArrayList<Album> albums;
-
+    private List<Album> albums;
     private ArrayList<Album> albumFilteredList;
+
+    private List<Album> albumsByGenre;
     private AlbumAdapter albumAdapter;
     private MainActivityAlbumViewModel mainActivityAlbumViewModel;
     private ActivityMainBinding activityMainBinding;
     private MainActivityClickHandler mainActivityClickHandler;
     private BottomNavigationView bottomNavigationView;
     private SearchView searchView;
+
+    private Button buttonAll, buttonAfrobeats, buttonRAndB, buttonHipHop, buttonJazz, buttonSalsa, buttonHouse, buttonDrumAndBass, buttonClassical;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +101,42 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        buttonAll = findViewById(R.id.all);
+        buttonAfrobeats = findViewById(R.id.afrobeats);
+        buttonClassical = findViewById(R.id.classical);
+        buttonHouse = findViewById(R.id.house);
+        buttonJazz = findViewById(R.id.jazz);
+        buttonDrumAndBass = findViewById(R.id.drumAndBass);
+        buttonSalsa = findViewById(R.id.salsa);
+        buttonHipHop = findViewById(R.id.hiphop);
+        buttonRAndB = findViewById(R.id.rAndB);
+
+        buttonAll.setOnClickListener(view -> { setSelectedButton(buttonAll); getAllAlbumsByGenre("All"); });
+        buttonAfrobeats.setOnClickListener(view -> { setSelectedButton(buttonAfrobeats); getAllAlbumsByGenre("Afrobeats"); });
+        buttonClassical.setOnClickListener(view -> { setSelectedButton(buttonClassical); getAllAlbumsByGenre("Classical"); });
+        buttonHouse.setOnClickListener(view -> { setSelectedButton(buttonHouse); getAllAlbumsByGenre("House"); });
+        buttonJazz.setOnClickListener(view -> { setSelectedButton(buttonJazz); getAllAlbumsByGenre("Jazz"); });
+        buttonDrumAndBass.setOnClickListener(view -> { setSelectedButton(buttonDrumAndBass); getAllAlbumsByGenre("Drum And Bass"); });
+        buttonSalsa.setOnClickListener(view -> { setSelectedButton(buttonSalsa); getAllAlbumsByGenre("Salsa"); });
+        buttonHipHop.setOnClickListener(view -> { setSelectedButton(buttonHipHop); getAllAlbumsByGenre("Hip-Hop"); });
+        buttonRAndB.setOnClickListener(view -> { setSelectedButton(buttonRAndB); getAllAlbumsByGenre("R&B"); });
+
+
+    }
+
+    private void setSelectedButton(Button selectedButton) {
+        buttonAll.setSelected(false);
+        buttonAfrobeats.setSelected(false);
+        buttonRAndB.setSelected(false);
+        buttonHipHop.setSelected(false);
+        buttonJazz.setSelected(false);
+        buttonSalsa.setSelected(false);
+        buttonHouse.setSelected(false);
+        buttonDrumAndBass.setSelected(false);
+        buttonClassical.setSelected(false);
+
+        selectedButton.setSelected(true);
     }
 
     private void getAllAlbums() {
@@ -128,6 +172,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "No album found", Toast.LENGTH_SHORT).show();
         }
         albumAdapter.setAlbumFilteredList(albumFilteredList);
+    }
 
+    private void getAllAlbumsByGenre(String selectedGenre) {
+        if(selectedGenre.equalsIgnoreCase("All")) {
+            albumAdapter.setAlbumFilteredList(albums);
+        } else {
+            albumsByGenre = albums.stream()
+                    .filter(album -> album.getGenre().equalsIgnoreCase(selectedGenre))
+                    .collect(Collectors.toList());
+
+            albumAdapter.setAlbumFilteredList(albumsByGenre);
+        }
+        recyclerView.scrollToPosition(0);
+        albumAdapter.notifyDataSetChanged();
     }
 }
