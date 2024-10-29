@@ -20,11 +20,11 @@
                 android:id="@+id/searchLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 app:layout_constraintTop_toTopOf="parent"
                 >
 
-                <androidx.appcompat.widget.SearchView
+                <SearchView
                     android:id="@+id/search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
