@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="artist"
+            type="com.northcoders.recordshopapplication.model.Artist" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.artistOverview.ArtistOverviewActivity">
+
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/light_black"
+            >
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back_home"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@android:color/transparent"
+                style="?android:attr/borderlessButtonStyle"
+                android:drawableLeft="@drawable/arrow_back"
+                android:layout_gravity="start"
+                />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/editButton"
+                style="@style/CustomEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Edit Artist Info"
+                android:src="@drawable/edit_note" />
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="20dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/artistLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/addArtistImageView"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:maxWidth="250dp"
+                    android:maxHeight="250dp"
+                    android:minWidth="250dp"
+                    android:minHeight="250dp"
+                    android:contentDescription="@{@string/artistImage(artist.name)}"
+                    android:layout_gravity="center"
+                    android:elevation="2dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@{artist.imageUrl}"
+                    app:srcCompat="@drawable/ic_launcher_background"
+                    android:background="@drawable/my_rect"
+                    />
+
+                <TextView
+                    android:id="@+id/artistName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={artist.name}"
+                    tools:text="Album Name"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="20dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    />
+
+                <TextView
+                    android:id="@+id/placeOfBirthView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={artist.placeOfBirth}"
+                    tools:text="Artist Place of Birth"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="20dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    />
+
+                <TextView
+                    android:id="@+id/dateOfBirthView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={artist.dateOfBirth}"
+                    tools:text="00/00/0000"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={artist.biography}"
+                    tools:text="Description"
+                    android:textColor="@color/white"
+                    android:layout_marginVertical="30dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
