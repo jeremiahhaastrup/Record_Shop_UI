@@ -15,7 +15,6 @@ import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityLibraryBinding;
 import com.northcoders.recordshopapplication.ui.create.CreateActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
-import com.northcoders.recordshopapplication.ui.search.SearchActivity;
 
 public class LibraryActivity extends AppCompatActivity {
 
@@ -44,10 +43,6 @@ public class LibraryActivity extends AppCompatActivity {
 
                 if (id == R.id.homeView) {
                     intent = new Intent(LibraryActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    return true;
-                } else if (id == R.id.search) {
-                    intent = new Intent(LibraryActivity.this, SearchActivity.class);
                     startActivity(intent);
                     return true;
                 } else if (id == R.id.create) {
