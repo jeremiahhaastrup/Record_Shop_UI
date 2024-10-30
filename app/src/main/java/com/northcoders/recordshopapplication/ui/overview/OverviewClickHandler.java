@@ -26,6 +26,11 @@ public class OverviewClickHandler {
         context.startActivity(intent);
     }
 
+    public void onBackToAlbumFromArtistBtnClicked(View view) {
+        Intent intent = new Intent(view.getContext(), AlbumOverviewActivity.class);
+        context.startActivity(intent);
+    }
+
     public void onEditBtnClicked(View view) {
         Intent intent = new Intent(view.getContext(), EditAlbumActivity.class);
         context.startActivity(intent);
