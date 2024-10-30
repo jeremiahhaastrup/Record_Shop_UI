@@ -2,6 +2,7 @@ package com.northcoders.recordshopapplication.ui.mainactivity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,18 +13,21 @@ import com.bumptech.glide.Glide;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.AlbumViewBinding;
 import com.northcoders.recordshopapplication.model.Album;
+import com.northcoders.recordshopapplication.util.RecyclerViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>{
 
-    List<Album> albumList;
-    Context context;
+    private List<Album> albumList;
+    private Context context;
+    private RecyclerViewInterface recyclerViewInterface;
 
-    public AlbumAdapter(List<Album> albumList, Context context) {
+    public AlbumAdapter(List<Album> albumList, Context context, RecyclerViewInterface recyclerViewInterface) {
         this.albumList = albumList;
         this.context = context;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     public void setAlbumFilteredList(List<Album> albumListFiltered) {
@@ -40,7 +44,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
                 parent,
                 false);
 
-        return new AlbumViewHolder(albumViewBinding);
+        return new AlbumViewHolder(albumViewBinding, recyclerViewInterface);
     }
 
     @Override
@@ -62,11 +66,24 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     }
 
     public static class AlbumViewHolder extends RecyclerView.ViewHolder {
-        private AlbumViewBinding albumViewBinding;
+        private final AlbumViewBinding albumViewBinding;
 
-        public AlbumViewHolder(AlbumViewBinding albumViewBinding) {
+        public AlbumViewHolder(AlbumViewBinding albumViewBinding, RecyclerViewInterface recyclerViewInterface) {
             super(albumViewBinding.getRoot());
             this.albumViewBinding = albumViewBinding;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int position = getAdapterPosition();
+
+                        if (position != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }
