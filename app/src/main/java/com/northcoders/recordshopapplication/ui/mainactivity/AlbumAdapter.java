@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.AlbumViewBinding;
 import com.northcoders.recordshopapplication.model.Album;
@@ -48,6 +47,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
         Album album = albumList.get(position);
         holder.albumViewBinding.setAlbum(album);
+
+        Glide.with(context)
+                .load(album.getImageUrl())
+                .fitCenter()
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .into(holder.albumViewBinding.albumCoverView);
     }
 
     @Override
