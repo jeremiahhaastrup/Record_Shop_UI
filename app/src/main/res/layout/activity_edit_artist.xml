@@ -9,7 +9,7 @@
             type="com.northcoders.recordshopapplication.model.Artist" />
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.create.CreateClickHandlers" />
+            type="com.northcoders.recordshopapplication.ui.overview.OverviewClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
