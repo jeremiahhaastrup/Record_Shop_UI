@@ -2,6 +2,7 @@ package com.northcoders.recordshopapplication.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -61,8 +62,8 @@ public class Album extends BaseObservable implements Parcelable {
         imageUrl = in.readString();
         description = in.readString();
         releaseDate = in.readString();
-        genre = in.readString();
         artist = in.readParcelable(Artist.class.getClassLoader());
+        genre = in.readString();
     }
 
     public static final Creator<Album> CREATOR = new Creator<Album>() {
@@ -175,8 +176,8 @@ public class Album extends BaseObservable implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int flags) {
         parcel.writeInt(album_id);
-        parcel.writeInt(stock);
         parcel.writeString(title);
+        parcel.writeInt(stock);
         parcel.writeInt(sales);
         parcel.writeString(imageUrl);
         parcel.writeString(description);
