@@ -63,12 +63,12 @@ public class OverviewClickHandler {
                 .show();
     }
 
-    public void onEditBtnClicked(View view) {
+    public void onEditAlbumBtnClicked(View view) {
         Intent intent = new Intent(view.getContext(), EditAlbumActivity.class);
         context.startActivity(intent);
     }
 
-    private void onArtistBtnClicked(View view) {
+    public void onArtistBtnClicked(View view) {
         Intent intent = new Intent(view.getContext(), ArtistOverviewActivity.class);
         context.startActivity(intent);
     }
