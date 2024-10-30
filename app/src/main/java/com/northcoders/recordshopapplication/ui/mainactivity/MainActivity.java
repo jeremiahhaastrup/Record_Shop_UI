@@ -21,7 +21,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityMainBinding;
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.albumOverview.AlbumOverviewActivity;
+import com.northcoders.recordshopapplication.ui.overview.AlbumOverviewActivity;
 import com.northcoders.recordshopapplication.ui.create.CreateActivity;
 import com.northcoders.recordshopapplication.ui.library.LibraryActivity;
 import com.northcoders.recordshopapplication.util.RecyclerViewInterface;
