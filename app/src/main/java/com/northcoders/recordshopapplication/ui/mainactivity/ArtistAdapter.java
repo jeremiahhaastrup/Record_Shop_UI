@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ArtistViewBinding;
 import com.northcoders.recordshopapplication.model.Artist;
@@ -40,11 +41,18 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
         Artist artist = artistList.get(position);
         holder.artistViewBinding.setArtist(artist);
+
+        Glide.with(context)
+                .load(artist.getImageUrl())
+                .fitCenter()
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .into(holder.artistViewBinding.artistImageView);
     }
 
     @Override
     public int getItemCount() {
-        return artistList.size();
+        return artistList == null ? 0 : artistList.size();
     }
 
     public static class ArtistViewHolder extends RecyclerView.ViewHolder {
