@@ -21,20 +21,19 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityMainBinding;
 import com.northcoders.recordshopapplication.model.Album;
+import com.northcoders.recordshopapplication.ui.albumOverview.AlbumOverviewActivity;
 import com.northcoders.recordshopapplication.ui.create.CreateActivity;
 import com.northcoders.recordshopapplication.ui.library.LibraryActivity;
+import com.northcoders.recordshopapplication.util.RecyclerViewInterface;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewInterface {
 
     private RecyclerView recyclerView;
-    private List<Album> albums;
+    private List<Album> albumList;
     private ArrayList<Album> albumFilteredList;
 
     private List<Album> albumsByGenre;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private MainActivityClickHandler mainActivityClickHandler;
     private BottomNavigationView bottomNavigationView;
     private SearchView searchView;
+    private static final String ALBUM_KEY = "album";
 
     private Button buttonAll, buttonAfrobeats, buttonRAndB, buttonHipHop, buttonJazz, buttonSalsa, buttonHouse, buttonDrumAndBass, buttonClassical;
 
@@ -121,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
         buttonSalsa.setOnClickListener(view -> { setSelectedButton(buttonSalsa); getAllAlbumsByGenre("Salsa"); });
         buttonHipHop.setOnClickListener(view -> { setSelectedButton(buttonHipHop); getAllAlbumsByGenre("Hip-Hop"); });
         buttonRAndB.setOnClickListener(view -> { setSelectedButton(buttonRAndB); getAllAlbumsByGenre("R&B"); });
-
-
     }
 
     private void setSelectedButton(Button selectedButton) {
@@ -143,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivityAlbumViewModel.getAllAlbums().observe(this, new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albumsFromLiveData) {
-                albums = (ArrayList<Album>) albumsFromLiveData;
+                albumList = (ArrayList<Album>) albumsFromLiveData;
                 displayInRecyclerView();
             }
         });
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayInRecyclerView() {
         recyclerView = activityMainBinding.RecyclerView;
-        albumAdapter = new AlbumAdapter(albums, this);
+        albumAdapter = new AlbumAdapter(albumList, this, this);
         recyclerView.setAdapter(albumAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -161,10 +159,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void filterAlbumList(String text) {
         albumFilteredList = new ArrayList<>();
-        for (Album album : albums) {
+        for (Album album : albumList) {
             if (album.getTitle().toLowerCase().contains(text.toLowerCase())
                     || album.getGenre().toLowerCase().contains(text.toLowerCase())
-                    || album.getArtist().getName().toLowerCase().contains(text.toLowerCase())) {
+                    || album.getArtist().getName().toLowerCase().contains(text.toLowerCase())
+                    || album.getReleaseDate().contains(text)) {
                 albumFilteredList.add(album);
             }
         }
@@ -176,9 +175,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void getAllAlbumsByGenre(String selectedGenre) {
         if(selectedGenre.equalsIgnoreCase("All")) {
-            albumAdapter.setAlbumFilteredList(albums);
+            albumAdapter.setAlbumFilteredList(albumList);
         } else {
-            albumsByGenre = albums.stream()
+            albumsByGenre = albumList.stream()
                     .filter(album -> album.getGenre().equalsIgnoreCase(selectedGenre))
                     .collect(Collectors.toList());
 
@@ -186,5 +185,17 @@ public class MainActivity extends AppCompatActivity {
         }
         recyclerView.scrollToPosition(0);
         albumAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(MainActivity.this, AlbumOverviewActivity.class);
+
+        if (albumFilteredList == null || albumFilteredList.isEmpty()) {
+            intent.putExtra(ALBUM_KEY, albumList.get(position));
+        } else {
+            intent.putExtra(ALBUM_KEY, albumFilteredList.get(position));
+        }
+        startActivity(intent);
     }
 }
