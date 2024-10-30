@@ -31,10 +31,10 @@ public class Artist extends BaseObservable implements Parcelable {
     private String placeOfBirth;
 
     public Artist(String name, String imageUrl, String biography, int artist_id, String dateOfBirth, String placeOfBirth) {
+        this.artist_id = artist_id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.biography = biography;
-        this.artist_id = artist_id;
         this.dateOfBirth = dateOfBirth;
         this.placeOfBirth = placeOfBirth;
     }
