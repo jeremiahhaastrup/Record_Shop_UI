@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.AlbumViewBinding;
 import com.northcoders.recordshopapplication.model.Album;
@@ -54,9 +55,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
         Glide.with(context)
                 .load(album.getImageUrl())
-                .fitCenter()
+                .centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.error)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(holder.albumViewBinding.albumCoverView);
     }
 
