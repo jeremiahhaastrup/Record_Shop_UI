@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityAlbumOverviewBinding;
 import com.northcoders.recordshopapplication.model.Album;
@@ -35,6 +37,15 @@ public class AlbumOverviewActivity extends AppCompatActivity {
 
         handler = new OverviewClickHandler(this, album, viewmodel);
         activityAlbumOverviewBinding.setClickHandler(handler);
+
+        Glide.with(this)
+                .load(album.getImageUrl())
+                .centerCrop()
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(activityAlbumOverviewBinding.addAlbumCoverView);
 
     }
 }
