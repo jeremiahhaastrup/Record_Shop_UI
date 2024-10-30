@@ -4,41 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="artist"
-            type="com.northcoders.recordshopapplication.model.Artist" />
+            name="album"
+            type="com.northcoders.recordshopapplication.model.Album" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.artistOverview.ArtistOverviewActivity">
+        tools:context=".ui.overview.ArtistOverviewActivity">
 
         <LinearLayout
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@color/light_black"
-            >
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/cancelButton"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/arrow_back"
                 android:text="@string/back_home"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:background="@android:color/transparent"
-                style="?android:attr/borderlessButtonStyle"
-                android:drawableLeft="@drawable/arrow_back"
-                android:layout_gravity="start"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Space
                 android:layout_width="0dp"
@@ -59,94 +58,87 @@
             android:id="@+id/nestedView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headerLayout"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="20dp"
-            >
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
             <LinearLayout
                 android:id="@+id/artistLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/addArtistImageView"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/my_rect"
+                    android:contentDescription="@{@string/artistImage(album.artist.name)}"
+                    android:elevation="2dp"
                     android:maxWidth="250dp"
                     android:maxHeight="250dp"
                     android:minWidth="250dp"
                     android:minHeight="250dp"
-                    android:contentDescription="@{@string/artistImage(artist.name)}"
-                    android:layout_gravity="center"
-                    android:elevation="2dp"
-                    android:layout_marginTop="30dp"
-                    android:src="@{artist.imageUrl}"
-                    app:srcCompat="@drawable/ic_launcher_background"
-                    android:background="@drawable/my_rect"
-                    />
+                    android:src="@{album.artist.imageUrl}"
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
                 <TextView
                     android:id="@+id/artistName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={artist.name}"
-                    tools:text="Album Name"
-                    android:textColor="@color/white"
                     android:layout_marginTop="20dp"
-                    android:maxLines="2"
                     android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@={album.artist.name}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
                     android:textSize="28sp"
                     android:textStyle="bold"
-                    android:textAlignment="textStart"
-                    />
+                    tools:text="Album Name" />
 
                 <TextView
                     android:id="@+id/placeOfBirthView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={artist.placeOfBirth}"
-                    tools:text="Artist Place of Birth"
-                    android:textColor="@color/white"
                     android:layout_marginTop="20dp"
-                    android:maxLines="2"
                     android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@={album.artist.placeOfBirth}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textAlignment="textStart"
-                    />
+                    tools:text="Artist Place of Birth" />
 
                 <TextView
                     android:id="@+id/dateOfBirthView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={artist.dateOfBirth}"
-                    tools:text="00/00/0000"
-                    android:textColor="@color/white"
                     android:layout_marginTop="20dp"
+                    android:text="@={album.artist.dateOfBirth}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textAlignment="textStart"
-                    />
+                    tools:text="00/00/0000" />
 
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={artist.biography}"
-                    tools:text="Description"
-                    android:textColor="@color/white"
                     android:layout_marginVertical="30dp"
-                    android:maxLines="2"
                     android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@={album.artist.biography}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textAlignment="textStart"
-                    />
+                    tools:text="Description" />
 
             </LinearLayout>
 
