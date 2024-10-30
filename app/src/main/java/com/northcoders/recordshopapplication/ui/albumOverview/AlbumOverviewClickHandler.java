@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.northcoders.recordshopapplication.model.Album;
+import com.northcoders.recordshopapplication.ui.edit.EditAlbumActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 
@@ -25,8 +26,10 @@ public class AlbumOverviewClickHandler {
         context.startActivity(intent);
     }
 
-    // edit button
-
+    public void onEditBtnClicked(View view) {
+        Intent intent = new Intent(view.getContext(), EditAlbumActivity.class);
+        context.startActivity(intent);
+    }
 
     // get specific artist
 }
