@@ -43,8 +43,6 @@ public class AlbumOverviewActivity extends AppCompatActivity {
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.error)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(activityAlbumOverviewBinding.addAlbumCoverView);
 
     }
