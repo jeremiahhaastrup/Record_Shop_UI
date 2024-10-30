@@ -33,7 +33,7 @@ public class OverviewClickHandler {
         context.startActivity(intent);
     }
 
-    public void onCancelAlbumEditBrn(View view) {
+    public void onCancelAlbumEditBtn(View view) {
         new AlertDialog.Builder(view.getContext())
                 .setTitle("Back to Album")
                 .setMessage("Are you sure you want to leave this page? All progress will be lost.")
@@ -48,6 +48,20 @@ public class OverviewClickHandler {
                 .show();
     }
 
+    public void onCancelArtistEditBtn(View view) {
+        new AlertDialog.Builder(view.getContext())
+                .setTitle("Back to Artist")
+                .setMessage("Are you sure you want to leave this page? All progress will be lost.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(view.getContext(), ArtistOverviewActivity.class);
+                        context.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 
     public void onEditBtnClicked(View view) {
         Intent intent = new Intent(view.getContext(), EditAlbumActivity.class);
