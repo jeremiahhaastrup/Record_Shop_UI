@@ -13,7 +13,7 @@
             type="com.northcoders.recordshopapplication.model.Artist" />
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.overview.AlbumOverviewClickHandler" />
+            type="com.northcoders.recordshopapplication.ui.edit.EditAlbumClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -282,7 +282,7 @@
                             android:id="@+id/deleteAlbumButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:contentDescription="@string/submit_album_button"
+                            android:contentDescription="@string/delete_album_button"
                             android:text="@string/delete"
                             android:textStyle="bold"
                             android:layout_gravity="center"
@@ -291,6 +291,7 @@
                             android:layout_marginTop="10dp"
                             android:backgroundTint="@color/red"
                             android:textColor="@color/white"
+                            android:onClick="@{clickHandler::onDeleteAlbumBtn}"
                             />
 
                     </LinearLayout>
