@@ -11,13 +11,13 @@ import com.northcoders.recordshopapplication.ui.edit.EditAlbumActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 
-public class OverviewClickHandler {
+public class AlbumOverviewClickHandler {
 
     private Context context;
     private Album album;
     private MainActivityAlbumViewModel mainActivityAlbumViewModel;
 
-    public OverviewClickHandler(Context context, Album album, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
+    public AlbumOverviewClickHandler(Context context, Album album, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
         this.context = context;
         this.album = album;
         this.mainActivityAlbumViewModel = mainActivityAlbumViewModel;
@@ -25,26 +25,6 @@ public class OverviewClickHandler {
 
     public void onBackHomeBtnClicked(View view) {
         Intent intent = new Intent(view.getContext(), MainActivity.class);
-        context.startActivity(intent);
-    }
-
-    public void onCancelAlbumEditBtn(View view) {
-        new AlertDialog.Builder(view.getContext())
-                .setTitle("Back to Album")
-                .setMessage("Are you sure you want to leave this page? All progress will be lost.")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(view.getContext(), AlbumOverviewActivity.class);
-                        context.startActivity(intent);
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
-
-    public void onEditAlbumBtnClicked(View view) {
-        Intent intent = new Intent(view.getContext(), EditAlbumActivity.class);
         context.startActivity(intent);
     }
 
