@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -21,9 +20,9 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityMainBinding;
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.overview.AlbumOverviewActivity;
 import com.northcoders.recordshopapplication.ui.create.CreateActivity;
 import com.northcoders.recordshopapplication.ui.library.LibraryActivity;
+import com.northcoders.recordshopapplication.ui.overview.AlbumOverviewActivity;
 import com.northcoders.recordshopapplication.util.RecyclerViewInterface;
 
 import java.util.ArrayList;
@@ -32,10 +31,10 @@ import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewInterface {
 
+    private static final String ALBUM_KEY = "album";
     private RecyclerView recyclerView;
     private List<Album> albumList;
     private ArrayList<Album> albumFilteredList;
-
     private List<Album> albumsByGenre;
     private AlbumAdapter albumAdapter;
     private MainActivityAlbumViewModel mainActivityAlbumViewModel;
@@ -43,14 +42,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     private MainActivityClickHandler mainActivityClickHandler;
     private BottomNavigationView bottomNavigationView;
     private SearchView searchView;
-    private static final String ALBUM_KEY = "album";
-
     private Button buttonAll, buttonAfrobeats, buttonRAndB, buttonHipHop, buttonJazz, buttonSalsa, buttonHouse, buttonDrumAndBass, buttonClassical;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -112,15 +108,42 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         buttonHipHop = findViewById(R.id.hiphop);
         buttonRAndB = findViewById(R.id.rAndB);
 
-        buttonAll.setOnClickListener(view -> { setSelectedButton(buttonAll); getAllAlbumsByGenre("All"); });
-        buttonAfrobeats.setOnClickListener(view -> { setSelectedButton(buttonAfrobeats); getAllAlbumsByGenre("Afrobeats"); });
-        buttonClassical.setOnClickListener(view -> { setSelectedButton(buttonClassical); getAllAlbumsByGenre("Classical"); });
-        buttonHouse.setOnClickListener(view -> { setSelectedButton(buttonHouse); getAllAlbumsByGenre("House"); });
-        buttonJazz.setOnClickListener(view -> { setSelectedButton(buttonJazz); getAllAlbumsByGenre("Jazz"); });
-        buttonDrumAndBass.setOnClickListener(view -> { setSelectedButton(buttonDrumAndBass); getAllAlbumsByGenre("Drum And Bass"); });
-        buttonSalsa.setOnClickListener(view -> { setSelectedButton(buttonSalsa); getAllAlbumsByGenre("Salsa"); });
-        buttonHipHop.setOnClickListener(view -> { setSelectedButton(buttonHipHop); getAllAlbumsByGenre("Hip-Hop"); });
-        buttonRAndB.setOnClickListener(view -> { setSelectedButton(buttonRAndB); getAllAlbumsByGenre("R&B"); });
+        buttonAll.setOnClickListener(view -> {
+            setSelectedButton(buttonAll);
+            getAllAlbumsByGenre("All");
+        });
+        buttonAfrobeats.setOnClickListener(view -> {
+            setSelectedButton(buttonAfrobeats);
+            getAllAlbumsByGenre("Afrobeats");
+        });
+        buttonClassical.setOnClickListener(view -> {
+            setSelectedButton(buttonClassical);
+            getAllAlbumsByGenre("Classical");
+        });
+        buttonHouse.setOnClickListener(view -> {
+            setSelectedButton(buttonHouse);
+            getAllAlbumsByGenre("House");
+        });
+        buttonJazz.setOnClickListener(view -> {
+            setSelectedButton(buttonJazz);
+            getAllAlbumsByGenre("Jazz");
+        });
+        buttonDrumAndBass.setOnClickListener(view -> {
+            setSelectedButton(buttonDrumAndBass);
+            getAllAlbumsByGenre("Drum And Bass");
+        });
+        buttonSalsa.setOnClickListener(view -> {
+            setSelectedButton(buttonSalsa);
+            getAllAlbumsByGenre("Salsa");
+        });
+        buttonHipHop.setOnClickListener(view -> {
+            setSelectedButton(buttonHipHop);
+            getAllAlbumsByGenre("Hip-Hop");
+        });
+        buttonRAndB.setOnClickListener(view -> {
+            setSelectedButton(buttonRAndB);
+            getAllAlbumsByGenre("R&B");
+        });
     }
 
     private void setSelectedButton(Button selectedButton) {
@@ -141,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         mainActivityAlbumViewModel.getAllAlbums().observe(this, new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albumsFromLiveData) {
-                albumList = (ArrayList<Album>) albumsFromLiveData;
+                albumList = albumsFromLiveData;
                 displayInRecyclerView();
             }
         });
@@ -174,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     }
 
     private void getAllAlbumsByGenre(String selectedGenre) {
-        if(selectedGenre.equalsIgnoreCase("All")) {
+        if (selectedGenre.equalsIgnoreCase("All")) {
             albumAdapter.setAlbumFilteredList(albumList);
         } else {
             albumsByGenre = albumList.stream()

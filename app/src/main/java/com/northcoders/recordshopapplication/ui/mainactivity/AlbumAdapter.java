@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.AlbumViewBinding;
 import com.northcoders.recordshopapplication.model.Album;
@@ -19,11 +18,11 @@ import com.northcoders.recordshopapplication.util.RecyclerViewInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>{
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
     private List<Album> albumList;
-    private Context context;
-    private RecyclerViewInterface recyclerViewInterface;
+    private final Context context;
+    private final RecyclerViewInterface recyclerViewInterface;
 
     public AlbumAdapter(List<Album> albumList, Context context, RecyclerViewInterface recyclerViewInterface) {
         this.albumList = albumList;
@@ -58,8 +57,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.error)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(holder.albumViewBinding.albumCoverView);
     }
 
