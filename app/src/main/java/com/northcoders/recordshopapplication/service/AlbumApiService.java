@@ -25,11 +25,11 @@ public interface AlbumApiService {
     @Multipart
     Call<Album> addAlbum(@Part("album") RequestBody album, @Part MultipartBody.Part file);
 
-    @PUT("albums/{id}")
+    @PUT("/api/v1/albums/{id}")
     @Multipart
     Call<Album> updateAlbum(@Path("id") long id, @Part("album") RequestBody album, @Part MultipartBody.Part file);
 
-    @DELETE
+    @DELETE("/api/v1/albums/{id}")
     Call<String> deleteAlbum(@Path("id") long id);
 
     @GET("/api/v1/artists")
