@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="artist"
             type="com.northcoders.recordshopapplication.model.Artist" />
+
         <variable
             name="clickHandler"
             type="com.northcoders.recordshopapplication.ui.overview.ArtistOverviewClickHandler" />
@@ -36,11 +38,11 @@
                 android:layout_gravity="start"
                 android:background="@android:color/transparent"
                 android:drawableLeft="@drawable/arrow_back"
+                android:onClick="@{clickHandler::onBackToAlbumFromArtistBtnClicked}"
                 android:text="@string/back_to_album"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{clickHandler::onBackToAlbumFromArtistBtnClicked}"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Space
                 android:layout_width="0dp"
@@ -53,8 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="Edit Artist Info"
-                android:src="@drawable/edit_note"
-                android:onClick="@{clickHandler::onEditArtistBtnClicked}"/>
+                android:onClick="@{clickHandler::onEditArtistBtnClicked}"
+                android:src="@drawable/edit_note" />
 
         </LinearLayout>
 
