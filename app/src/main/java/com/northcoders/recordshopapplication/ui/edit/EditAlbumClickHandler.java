@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.northcoders.recordshopapplication.model.Album;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 import com.northcoders.recordshopapplication.ui.overview.AlbumOverviewActivity;
 
@@ -14,7 +15,7 @@ public class EditAlbumClickHandler {
     private Album album;
     private Context context;
     private MainActivityAlbumViewModel mainActivityAlbumViewModel;
-    private long id;
+    private long albumId;
 
     public EditAlbumClickHandler(Album album, Context context, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
         this.album = album;
@@ -30,6 +31,23 @@ public class EditAlbumClickHandler {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(view.getContext(), AlbumOverviewActivity.class);
+                        context.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    public void onDeleteAlbumBtn(View view) {
+        new AlertDialog.Builder(view.getContext())
+                .setTitle(String.format("Delete %s", album.getTitle()))
+                .setMessage("This action cannot be undone.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(view.getContext(), MainActivity.class);
+                        albumId = album.getAlbum_id();
+                        mainActivityAlbumViewModel.deleteAlbum(albumId);
                         context.startActivity(intent);
                     }
                 })
