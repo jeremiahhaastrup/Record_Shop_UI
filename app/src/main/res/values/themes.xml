@@ -2,8 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.RecordShopApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowBackground">@color/light_black</item>
+        <item name="android:statusBarColor">@color/light_black</item>
     </style>
 
     <style name="Theme.RecordShopApplication" parent="Base.Theme.RecordShopApplication" />
