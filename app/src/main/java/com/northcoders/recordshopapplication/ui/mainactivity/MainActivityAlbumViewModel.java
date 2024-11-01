@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.northcoders.recordshopapplication.model.Album;
 import com.northcoders.recordshopapplication.repository.AlbumRepository;
 
+import java.io.File;
 import java.util.List;
 
 public class MainActivityAlbumViewModel extends AndroidViewModel {
@@ -24,7 +25,7 @@ public class MainActivityAlbumViewModel extends AndroidViewModel {
         return albumRepository.getMutableLiveData();
     }
 
-    public void addAlbum(Album album) {
-        albumRepository.addAlbum(album);
+    public void addAlbum(Album album, File file) {
+        albumRepository.addAlbum(album, file);
     }
 }
