@@ -133,6 +133,44 @@ public class CreateActivity extends AppCompatActivity {
                 }
         );
 
+
+        submitAlbumButton = findViewById(R.id.submitAlbumButton);
+
+        submitAlbumButton.setOnClickListener(v -> {
+            String stockString = String.valueOf(album.getStock());
+
+            if (album.getTitle() == null) {
+                Toast.makeText(this, "Album Title Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (album.getArtist() == null) {
+                Toast.makeText(this, "Album Artist Cannot Be Empty. Select or Create a New Artist If Not Available", Toast.LENGTH_SHORT).show();
+            } else if (album.getGenre() == null) {
+                Toast.makeText(this, "Album Genre Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (album.getReleaseDate() == null) {
+                Toast.makeText(this, "Album Release Cannot Be Empty ", Toast.LENGTH_SHORT).show();
+            } else if (album.getStock() < 0) {
+                Toast.makeText(this, "Album Stock Cannot Be Negative", Toast.LENGTH_SHORT).show();
+            } else if (stockString.trim().isEmpty()) {
+                Toast.makeText(this, "Album Stock Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+
+                Album newAlbum = new Album(
+                        album.getAlbum_id(),
+                        album.getStock(),
+                        album.getTitle(),
+                        0,
+                        album.getImageUrl(),
+                        album.getDescription(),
+                        album.getReleaseDate(),
+                        album.getArtist(),
+                        album.getGenre()
+                );
+
+                mainActivityAlbumViewModel.addAlbum(newAlbum, new File(path));
+                this.startActivity(intent);
+            }
+        });
+
         handleToggleBetweenLayouts();
         initialiseGenreDropdownMenu();
         initialiseArtistDropdownMenu();
