@@ -7,13 +7,17 @@
         <variable
             name="album"
             type="com.northcoders.recordshopapplication.model.Album" />
+        <variable
+            name="clickHandler"
+            type="com.northcoders.recordshopapplication.ui.overview.AlbumOverviewClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.albumOverview.AlbumOverviewActivity">
+        tools:context=".ui.overview.AlbumOverviewActivity"
+        android:layout_margin="15dp">
 
         <LinearLayout
             android:id="@+id/headerLayout"
@@ -37,6 +41,7 @@
                 android:background="@android:color/transparent"
                 style="?android:attr/borderlessButtonStyle"
                 android:drawableLeft="@drawable/arrow_back"
+                android:onClick="@{clickHandler::onBackHomeBtnClicked}"
                 />
 
             <Space
@@ -50,7 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="Edit Album Info"
-                android:src="@drawable/edit_note" />
+                android:src="@drawable/edit_note"
+                android:onClick="@{clickHandler::onEditAlbumBtnClicked}"/>
 
         </LinearLayout>
 
@@ -137,6 +143,7 @@
                             app:srcCompat="@drawable/ic_launcher_background"
                             app:shapeAppearanceOverlay="@style/Circular"
                             android:src="@{album.artist.imageUrl}"
+                            android:onClick="@{clickHandler::onArtistBtnClicked}"
                             />
 
                         <TextView
@@ -151,6 +158,7 @@
                             android:ellipsize="end"
                             android:textSize="20sp"
                             android:textStyle="bold"
+                            android:onClick="@{clickHandler::onArtistBtnClicked}"
                             />
                     </LinearLayout>
 
