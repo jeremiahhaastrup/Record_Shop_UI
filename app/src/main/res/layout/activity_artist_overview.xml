@@ -5,8 +5,11 @@
 
     <data>
         <variable
-            name="album"
-            type="com.northcoders.recordshopapplication.model.Album" />
+            name="artist"
+            type="com.northcoders.recordshopapplication.model.Artist" />
+        <variable
+            name="clickHandler"
+            type="com.northcoders.recordshopapplication.ui.overview.ArtistOverviewClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,10 +36,11 @@
                 android:layout_gravity="start"
                 android:background="@android:color/transparent"
                 android:drawableLeft="@drawable/arrow_back"
-                android:text="@string/back_home"
+                android:text="@string/back_to_album"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{clickHandler::onBackToAlbumFromArtistBtnClicked}"/>
 
             <Space
                 android:layout_width="0dp"
@@ -49,7 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="Edit Artist Info"
-                android:src="@drawable/edit_note" />
+                android:src="@drawable/edit_note"
+                android:onClick="@{clickHandler::onEditArtistBtnClicked}"/>
 
         </LinearLayout>
 
@@ -76,13 +81,13 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/my_rect"
-                    android:contentDescription="@{@string/artistImage(album.artist.name)}"
+                    android:contentDescription="@{@string/artistImage(artist.name)}"
                     android:elevation="2dp"
                     android:maxWidth="250dp"
                     android:maxHeight="250dp"
                     android:minWidth="250dp"
                     android:minHeight="250dp"
-                    android:src="@{album.artist.imageUrl}"
+                    android:src="@{artist.imageUrl}"
                     app:srcCompat="@drawable/ic_launcher_background" />
 
                 <TextView
@@ -92,7 +97,7 @@
                     android:layout_marginTop="20dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="@={album.artist.name}"
+                    android:text="@={artist.name}"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="28sp"
@@ -106,7 +111,7 @@
                     android:layout_marginTop="20dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="@={album.artist.placeOfBirth}"
+                    android:text="@={artist.placeOfBirth}"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -118,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@={album.artist.dateOfBirth}"
+                    android:text="@={artist.dateOfBirth}"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -132,7 +137,7 @@
                     android:layout_marginVertical="30dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="@={album.artist.biography}"
+                    android:text="@={artist.biography}"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="16sp"
