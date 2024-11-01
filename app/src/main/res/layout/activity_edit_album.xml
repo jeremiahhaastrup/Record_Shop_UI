@@ -13,7 +13,7 @@
             type="com.northcoders.recordshopapplication.model.Artist" />
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.overview.OverviewClickHandler" />
+            type="com.northcoders.recordshopapplication.ui.overview.AlbumOverviewClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,6 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/headerLayout"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="20dp"
             >
 
                 <LinearLayout
@@ -67,23 +68,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp"
                     >
 
-                    <ImageView
-                        android:id="@+id/addAlbumCoverView"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:maxWidth="200dp"
-                        android:maxHeight="200dp"
-                        android:minWidth="200dp"
-                        android:minHeight="200dp"
-                        android:contentDescription="@{@string/albumCover(album.title)}"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="50dp"
-                        android:src="@{album.imageUrl}"
-                        app:srcCompat="@drawable/ic_launcher_background"
-                        />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:id="@+id/addAlbumCoverView"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="H,1:1"
+                            android:contentDescription="@{@string/albumCover(album.title)}"
+                            android:elevation="2dp"
+                            android:src="@{album.imageUrl}"
+                            app:srcCompat="@drawable/ic_launcher_background"
+                            android:background="@drawable/my_rect"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <Button
                         android:id="@+id/changeAlbumCoverView"
