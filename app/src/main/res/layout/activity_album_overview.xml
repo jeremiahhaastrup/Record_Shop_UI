@@ -50,13 +50,13 @@
                 android:layout_weight="1" />
 
             <ImageButton
-                android:id="@+id/editButton"
+                android:id="@+id/editAlbumButton"
                 style="@style/CustomEditButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="Edit Album Info"
                 android:src="@drawable/edit_note"
-                android:onClick="@{clickHandler::onEditAlbumBtnClicked}"/>
+                />
 
         </LinearLayout>
 
@@ -78,22 +78,28 @@
                     android:orientation="vertical"
                     >
 
-                    <ImageView
-                        android:id="@+id/addAlbumCoverView"
-                        android:layout_width="250dp"
-                        android:layout_height="250dp"
-                        android:maxWidth="250dp"
-                        android:maxHeight="250dp"
-                        android:minWidth="250dp"
-                        android:minHeight="250dp"
-                        android:contentDescription="@{@string/albumCover(album.title)}"
-                        android:layout_gravity="center"
-                        android:elevation="2dp"
-                        android:layout_marginTop="30dp"
-                        android:src="@{album.imageUrl}"
-                        app:srcCompat="@drawable/ic_launcher_background"
-                        android:background="@drawable/my_rect"
-                        />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:id="@+id/addAlbumCoverView"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="H,1:1"
+                            android:contentDescription="@{@string/albumCover(album.title)}"
+                            android:elevation="2dp"
+                            android:src="@{album.imageUrl}"
+                            app:srcCompat="@drawable/ic_launcher_background"
+                            android:background="@drawable/my_rect"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/albumTitle"
