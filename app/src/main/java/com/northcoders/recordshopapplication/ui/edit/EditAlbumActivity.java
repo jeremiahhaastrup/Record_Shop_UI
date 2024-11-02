@@ -1,24 +1,66 @@
 package com.northcoders.recordshopapplication.ui.edit;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityEditAlbumBinding;
 import com.northcoders.recordshopapplication.model.Album;
+import com.northcoders.recordshopapplication.model.Artist;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
+import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityArtistViewModel;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class EditAlbumActivity extends AppCompatActivity {
 
     private static final String ALBUM_KEY = "album";
+    ActivityResultLauncher<PickVisualMediaRequest> photoPickerLauncher;
     private ActivityEditAlbumBinding activityEditAlbumBinding;
     private Album album;
     private EditAlbumClickHandler handler;
+    private TextView releaseDateText;
+    private Button releaseDateButton, changeAlbumCoverButton, updateAlbumButton;
+    private String path;
+    private String newPath;
+    private AutoCompleteTextView genreDropdownMenu, artistDropdownMenu;
+    private MainActivityArtistViewModel mainActivityArtistViewModel;
+    private MainActivityAlbumViewModel mainActivityAlbumViewModel;
+    Calendar calendar = Calendar.getInstance();
+    private ArrayList<Artist> artists;
+    private ArrayList<Artist> artistNames;
+    int mYear = calendar.get(Calendar.YEAR);
+    int mMonth = calendar.get(Calendar.MONTH);
+    int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
     @SuppressLint("NewApi")
     @Override
@@ -26,12 +68,15 @@ public class EditAlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_album);
 
+        artistNames = new ArrayList<>();
+
         activityEditAlbumBinding = DataBindingUtil.setContentView(this, R.layout.activity_edit_album);
         album = getIntent().getParcelableExtra(ALBUM_KEY, Album.class);
-        MainActivityAlbumViewModel viewmodel = new ViewModelProvider(this).get(MainActivityAlbumViewModel.class);
+        mainActivityAlbumViewModel = new ViewModelProvider(this).get(MainActivityAlbumViewModel.class);
+        mainActivityArtistViewModel = new ViewModelProvider(this).get(MainActivityArtistViewModel.class);
         activityEditAlbumBinding.setAlbum(album);
 
-        handler = new EditAlbumClickHandler(album, this, viewmodel);
+        handler = new EditAlbumClickHandler(album, this, mainActivityAlbumViewModel);
         activityEditAlbumBinding.setClickHandler(handler);
 
         Glide.with(this)
@@ -40,5 +85,83 @@ public class EditAlbumActivity extends AppCompatActivity {
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.error)
                 .into(activityEditAlbumBinding.addAlbumCoverView);
+
+        changeAlbumCoverButton = findViewById(R.id.changeAlbumCoverView);
+
+        changeAlbumCoverButton.setOnClickListener(v ->
+                photoPickerLauncher.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                        .build())
+        );
+
+        path = album.getImageUrl();
+
+        photoPickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.PickVisualMedia(),
+                uri -> {
+                    if (uri != null) {
+                        try {
+                            InputStream inputStream = getContentResolver().openInputStream(uri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            activityEditAlbumBinding.addAlbumCoverView.setImageBitmap(bitmap);
+                            inputStream.close();
+
+                            String mimeType = getContentResolver().getType(uri);
+                            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+
+                            File tempFile = new File(getCacheDir(), "file." + extension);
+                            Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
+                            FileOutputStream fos = new FileOutputStream(tempFile);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.flush();
+                            fos.close();
+
+                            newPath = tempFile.getAbsolutePath();
+                        } catch (IOException e) {
+                            Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
+        updateAlbumButton = findViewById(R.id.updateAlbumButton);
+
+        updateAlbumButton.setOnClickListener(v -> {
+            String stockString = String.valueOf(album.getStock());
+            File newFileToUpload = newPath != null ? new File(newPath) : null;
+
+            if (album.getTitle() == null) {
+                Toast.makeText(this, "Album Title Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (album.getArtist() == null) {
+                Toast.makeText(this, "Album Artist Cannot Be Empty. Select or Create a New Artist If Not Available", Toast.LENGTH_SHORT).show();
+            } else if (album.getGenre() == null) {
+                Toast.makeText(this, "Album Genre Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (album.getReleaseDate() == null) {
+                Toast.makeText(this, "Album Release Cannot Be Empty ", Toast.LENGTH_SHORT).show();
+            } else if (album.getStock() < 0) {
+                Toast.makeText(this, "Album Stock Cannot Be Negative", Toast.LENGTH_SHORT).show();
+            } else if (stockString.trim().isEmpty()) {
+                Toast.makeText(this, "Album Stock Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+
+                Album newAlbum = new Album(
+                        album.getAlbum_id(),
+                        album.getStock(),
+                        album.getTitle(),
+                        0,
+                        album.getImageUrl(),
+                        album.getDescription(),
+                        album.getReleaseDate(),
+                        album.getArtist(),
+                        album.getGenre()
+                );
+
+                mainActivityAlbumViewModel.updateAlbum(newAlbum.getAlbum_id(), newAlbum, newFileToUpload);
+                this.startActivity(intent);
+            }
+        });
+
     }
+
 }
