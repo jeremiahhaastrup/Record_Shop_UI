@@ -86,6 +86,16 @@ public class EditAlbumActivity extends AppCompatActivity {
                 .error(R.drawable.error)
                 .into(activityEditAlbumBinding.addAlbumCoverView);
 
+        releaseDateText = findViewById(R.id.albumReleaseDate);
+        releaseDateButton = findViewById(R.id.albumReleaseDateButton);
+
+        releaseDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDatePickerDialog();
+            }
+        });
+
         changeAlbumCoverButton = findViewById(R.id.changeAlbumCoverView);
 
         changeAlbumCoverButton.setOnClickListener(v ->
@@ -162,6 +172,16 @@ public class EditAlbumActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void openDatePickerDialog() {
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                releaseDateText.setText(String.format("%02d/%02d/%d", dayOfMonth, month + 1, year));
+            }
+        }, mYear, mMonth, mDay);
+        dialog.show();
     }
 
 }
