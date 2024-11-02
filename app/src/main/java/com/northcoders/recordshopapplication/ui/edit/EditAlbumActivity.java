@@ -172,6 +172,7 @@ public class EditAlbumActivity extends AppCompatActivity {
             }
         });
 
+        initialiseGenreDropdownMenu();
     }
 
     private void openDatePickerDialog() {
@@ -183,5 +184,31 @@ public class EditAlbumActivity extends AppCompatActivity {
         }, mYear, mMonth, mDay);
         dialog.show();
     }
+
+    private void initialiseGenreDropdownMenu() {
+        genreDropdownMenu = activityEditAlbumBinding.genreDropdown;
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.genres,
+                android.R.layout.simple_spinner_item
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genreDropdownMenu.setAdapter(adapter);
+        genreDropdownMenu.setThreshold(1);
+
+        genreDropdownMenu.setOnClickListener(v -> {
+            genreDropdownMenu.setText("");
+            genreDropdownMenu.showDropDown();
+        });
+
+        genreDropdownMenu.setOnItemClickListener((parent, view, position, id) -> {
+            genreDropdownMenu.clearFocus();
+        });
+    }
+
+
+
 
 }
