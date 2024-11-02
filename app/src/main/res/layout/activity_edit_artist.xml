@@ -4,46 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="artist"
             type="com.northcoders.recordshopapplication.model.Artist" />
+
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.overview.OverviewClickHandler" />
+            type="com.northcoders.recordshopapplication.ui.overview.ArtistOverviewClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.edit.EditArtistActivity"
+        android:fitsSystemWindows="true"
         android:padding="15sp"
-        android:fitsSystemWindows="true">
+        tools:context=".ui.edit.EditArtistActivity">
 
         <LinearLayout
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@color/light_black"
-            >
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/cancelButton"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@android:color/transparent"
+                android:onClick="@{clickHandler::onCancelArtistEditBtn}"
                 android:text="@string/cancel"
                 android:textColor="@color/red"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:background="@android:color/transparent"
-                style="?android:attr/borderlessButtonStyle"
-                android:onClick="@{clickHandler::onCancelArtistEditBtn}"
-                android:layout_gravity="start"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
 
@@ -51,47 +51,43 @@
             android:id="@+id/nestedView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headerLayout"
             app:layout_constraintBottom_toBottomOf="parent"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
             <LinearLayout
                 android:id="@+id/artistInfoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/addArtistImageView"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="@{@string/image(artist.name)}"
                     android:maxWidth="200dp"
                     android:maxHeight="200dp"
                     android:minWidth="200dp"
                     android:minHeight="200dp"
-                    android:contentDescription="@{@string/image(artist.name)}"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
                     android:src="@{artist.imageUrl}"
-                    app:srcCompat="@drawable/ic_launcher_background"
-                    />
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
                 <Button
                     android:id="@+id/changeArtistImageView"
-                    android:text="@string/change_image"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5sp"
-                    tools:text="Change Image"
+                    android:background="@android:color/transparent"
+                    android:text="@string/change_image"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:background="@android:color/transparent"
-                    style="?android:attr/borderlessButtonStyle"
-                    />
+                    tools:text="Change Image" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/artistName_layout"
@@ -101,16 +97,15 @@
                     android:hint="@string/name"
                     android:paddingHorizontal="32dp"
                     android:paddingVertical="15dp"
-                    app:hintTextColor="@color/white"
-                    app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+                    app:boxStrokeColor="@color/text_input_layout_stroke_color_selector"
+                    app:hintTextColor="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/artistName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@={artist.name}"
-                        android:textColor="@color/white"
-                        />
+                        android:textColor="@color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -127,20 +122,19 @@
                         android:id="@+id/artistDateOfBirth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="date"
                         android:focusable="false"
+                        android:inputType="date"
                         android:text="@={artist.dateOfBirth}"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
 
                     <Button
                         android:id="@+id/artistDateOfBirthButton"
+                        style="@style/CustomButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:text="@string/select_date"
                         android:layout_marginTop="5sp"
-                        style="@style/CustomButton"
-                        />
+                        android:text="@string/select_date"
+                        app:layout_constraintStart_toStartOf="parent" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -151,16 +145,15 @@
                     android:hint="@string/place_of_birth"
                     android:paddingHorizontal="32dp"
                     android:paddingVertical="15dp"
-                    app:hintTextColor="@color/white"
-                    app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+                    app:boxStrokeColor="@color/text_input_layout_stroke_color_selector"
+                    app:hintTextColor="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/artistPlaceOfBirth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@={artist.placeOfBirth}"
-                        android:textColor="@color/white"
-                        />
+                        android:textColor="@color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -171,39 +164,36 @@
                     android:hint="@string/biography"
                     android:paddingHorizontal="32dp"
                     android:paddingVertical="15dp"
-                    app:hintTextColor="@color/white"
-                    app:boxStrokeColor="@color/text_input_layout_stroke_color_selector">
+                    app:boxStrokeColor="@color/text_input_layout_stroke_color_selector"
+                    app:hintTextColor="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/artistBiography"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@={artist.biography}"
-                        android:textColor="@color/white"
-                        />
+                        android:textColor="@color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginHorizontal="60dp"
-                    >
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/updateArtistButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/submit_album_button"
-                        android:text="@string/update"
-                        android:textStyle="bold"
                         android:layout_gravity="center"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="15dp"
                         android:layout_marginTop="10dp"
                         android:backgroundTint="@color/green"
+                        android:contentDescription="@string/submit_album_button"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="15dp"
+                        android:text="@string/update"
                         android:textColor="@color/white"
-                        />
+                        android:textStyle="bold" />
 
                     <Space
                         android:layout_width="0dp"
@@ -214,16 +204,15 @@
                         android:id="@+id/deleteArtistButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/submit_album_button"
-                        android:text="@string/delete"
-                        android:textStyle="bold"
                         android:layout_gravity="center"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="15dp"
                         android:layout_marginTop="10dp"
                         android:backgroundTint="@color/red"
+                        android:contentDescription="@string/submit_album_button"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="15dp"
+                        android:text="@string/delete"
                         android:textColor="@color/white"
-                        />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
