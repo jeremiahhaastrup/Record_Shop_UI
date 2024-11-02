@@ -88,6 +88,48 @@ public class AlbumRepository {
         });
     }
 
+    public void updateAlbum(long id, Album album, File file) {
+
+        RequestBody albumBody = RequestBody.create(new Gson().toJson(album), MediaType.parse("application/json"));
+        MultipartBody.Part filePart = null;
+
+        if (file != null) {
+            filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(file, MediaType.parse("image/*")));
+            String fileName = file.getName();
+            if (!fileName.matches(".*\\.(jpg|jpeg|png|gif)$")) {
+                Toast.makeText(application.getApplicationContext(), "Unsupported image format", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        AlbumApiService albumApiService = RetrofitInstance.getService();
+        Call<Album> call = albumApiService.updateAlbum(id, albumBody, filePart);
+
+        call.enqueue(new Callback<Album>() {
+            @Override
+            public void onResponse(Call<Album> call, Response<Album> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(application.getApplicationContext(),
+                            "Album updated!",
+                            Toast.LENGTH_SHORT).show();
+                    Log.i("SUCCESSFUL RESPONSE", response.body().toString());
+                } else {
+                    Toast.makeText(application.getApplicationContext(),
+                            "Failed to update album. Error: " + response.code(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Album> call, Throwable throwable) {
+                Log.e("API Error", "Failure: " + throwable.getMessage(), throwable);
+                Toast.makeText(application.getApplicationContext(),
+                        "Album cannot be updated!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void deleteAlbum(long id) {
         AlbumApiService albumApiService = RetrofitInstance.getService();
         Call<String> call = albumApiService.deleteAlbum(id);
