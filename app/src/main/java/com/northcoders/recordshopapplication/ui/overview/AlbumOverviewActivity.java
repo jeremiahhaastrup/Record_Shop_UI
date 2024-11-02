@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -22,10 +23,12 @@ import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumVi
 public class AlbumOverviewActivity extends AppCompatActivity {
 
     private static final String ALBUM_KEY = "album";
+    private static final String ARTIST_KEY = "artist";
     private ActivityAlbumOverviewBinding activityAlbumOverviewBinding;
     private Album album;
     private AlbumOverviewClickHandler handler;
     private ImageButton editAlbumButton;
+    private TextView artistNameButton;
 
     @SuppressLint("NewApi")
     @Override
@@ -67,6 +70,16 @@ public class AlbumOverviewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AlbumOverviewActivity.this, EditAlbumActivity.class);
                 intent.putExtra(ALBUM_KEY, album);
+                startActivity(intent);
+            }
+        });
+
+        artistNameButton = findViewById(R.id.artistName);
+        artistNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AlbumOverviewActivity.this, ArtistOverviewActivity.class);
+                intent.putExtra(ARTIST_KEY, album.getArtist());
                 startActivity(intent);
             }
         });
