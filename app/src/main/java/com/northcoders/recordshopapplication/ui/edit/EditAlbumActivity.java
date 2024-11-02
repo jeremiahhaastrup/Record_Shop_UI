@@ -173,6 +173,7 @@ public class EditAlbumActivity extends AppCompatActivity {
         });
 
         initialiseGenreDropdownMenu();
+        initialiseArtistDropdownMenu();
     }
 
     private void openDatePickerDialog() {
@@ -208,7 +209,34 @@ public class EditAlbumActivity extends AppCompatActivity {
         });
     }
 
+    private void initialiseArtistDropdownMenu() {
+        artistDropdownMenu = activityEditAlbumBinding.artistDropdown;
 
+        ArrayAdapter<Artist> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                getAllArtists()
+        );
 
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        artistDropdownMenu.setAdapter(adapter);
+        artistDropdownMenu.setThreshold(1);
 
+        artistDropdownMenu.setOnItemClickListener((parent, view, position, id) -> {
+            Artist selectedArtist = adapter.getItem(position);
+            album.setArtist(selectedArtist);
+        });
+    }
+
+    private ArrayList<Artist> getAllArtists() {
+        mainActivityArtistViewModel.getAllArtists().observe(this, new Observer<List<Artist>>() {
+            @Override
+            public void onChanged(List<Artist> artistList) {
+                artists = (ArrayList<Artist>) artistList;
+                artistNames.clear();
+                artistNames.addAll(artists);
+            }
+        });
+        return artistNames;
+    }
 }
