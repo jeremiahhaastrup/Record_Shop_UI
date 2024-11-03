@@ -50,12 +50,11 @@
                 android:layout_weight="1" />
 
             <ImageButton
-                android:id="@+id/editButton"
+                android:id="@+id/editArtistButton"
                 style="@style/CustomEditButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="Edit Artist Info"
-                android:onClick="@{clickHandler::onEditArtistBtnClicked}"
                 android:src="@drawable/edit_note" />
 
         </LinearLayout>
