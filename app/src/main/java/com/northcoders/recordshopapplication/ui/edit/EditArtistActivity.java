@@ -39,7 +39,6 @@ import java.util.Calendar;
 public class EditArtistActivity extends AppCompatActivity {
 
     private static final String ARTIST_KEY = "artist";
-//    ActivityResultLauncher<PickVisualMediaRequest> photoPickerLauncher;
     Calendar calendar = Calendar.getInstance();
     int mYear = calendar.get(Calendar.YEAR);
     int mMonth = calendar.get(Calendar.MONTH);
@@ -98,34 +97,6 @@ public class EditArtistActivity extends AppCompatActivity {
         });
 
         path = artist.getImageUrl();
-
-//        photoPickerLauncher = registerForActivityResult(
-//                new ActivityResultContracts.PickVisualMedia(),
-//                uri -> {
-//                    if (uri != null) {
-//                        try {
-//                            InputStream inputStream = getContentResolver().openInputStream(uri);
-//                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//                            activityEditArtistBinding.addArtistImageView.setImageBitmap(bitmap);
-//                            inputStream.close();
-//
-//                            String mimeType = getContentResolver().getType(uri);
-//                            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-//
-//                            File tempFile = new File(getCacheDir(), "file." + extension);
-//                            Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
-//                            FileOutputStream fos = new FileOutputStream(tempFile);
-//                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//                            fos.flush();
-//                            fos.close();
-//
-//                            newPath = tempFile.getAbsolutePath();
-//                        } catch (IOException e) {
-//                            Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                }
-//        );
 
         updateArtistButton = findViewById(R.id.updateArtistButton);
 
