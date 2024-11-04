@@ -173,6 +173,16 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+        artistDateOfBirthButton = findViewById(R.id.artistDateOfBirthButton);
+        artistDateOfBirthText = findViewById(R.id.artistDateOfBirth);
+
+        artistDateOfBirthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBirthDatePickerDialog();
+            }
+        });
+
         changeArtistButton = findViewById(R.id.changeArtistButton);
 
         changeArtistButton.setOnClickListener(v ->
@@ -293,6 +303,16 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 releaseDateText.setText(String.format("%02d/%02d/%d", dayOfMonth, month + 1, year));
+            }
+        }, mYear, mMonth, mDay);
+        dialog.show();
+    }
+
+    private void openBirthDatePickerDialog() {
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                artistDateOfBirthText.setText(String.format("%02d/%02d/%d", dayOfMonth, month + 1, year));
             }
         }, mYear, mMonth, mDay);
         dialog.show();
