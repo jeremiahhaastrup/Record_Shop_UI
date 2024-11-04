@@ -35,4 +35,15 @@ public interface AlbumApiService {
     @GET("/api/v1/artists")
     Call<List<Artist>> getAllArtists();
 
+    @POST("/api/v1/artists")
+    @Multipart
+    Call<Artist> addArtist(@Part("artist") RequestBody artist, @Part MultipartBody.Part file);
+
+    @PUT("/api/v1/artists/{id}")
+    @Multipart
+    Call<Artist> updateArtist(@Path("id") long id, @Part("artist") RequestBody artist, @Part MultipartBody.Part file);
+
+    @DELETE("/api/v1/artists/{id}")
+    Call<String> deleteArtist(@Path("id") long id);
+
 }
