@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="artist"
             type="com.northcoders.recordshopapplication.model.Artist" />
@@ -13,61 +14,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20sp"
-        android:paddingBottom="20sp"
-        >
+        android:paddingBottom="20sp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/artistImageView"
             android:layout_width="80sp"
             android:layout_height="80sp"
-            android:maxHeight="80sp"
-            android:maxWidth="80sp"
             android:layout_marginStart="20sp"
             android:contentDescription="@{@string/albumCover(artist.name)}"
+            android:maxWidth="80sp"
+            android:maxHeight="80sp"
+            android:src="@{artist.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/placeOfBirthView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background"
             app:shapeAppearanceOverlay="@style/Circular"
-            android:src="@{artist.imageUrl}"
-            />
+            app:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/placeOfBirthView"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="@{artist.name}"
-            tools:text="NAME"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/artistImageView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="15sp"
             android:layout_marginStart="10sp"
-            android:textSize="17sp"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="100sp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{artist.name}"
             android:textAllCaps="false"
-            />
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/artistImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="NAME" />
 
         <TextView
             android:id="@+id/artistNameView"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="@{artist.placeOfBirth}"
-            tools:text="ARTIST PLACE OF BIRTH"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/artistImageView"
-            app:layout_constraintTop_toBottomOf="@+id/placeOfBirthView"
-            android:layout_marginTop="5sp"
             android:layout_marginStart="10sp"
-            android:textSize="14sp"
+            android:layout_marginTop="5sp"
             android:layout_marginEnd="100sp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{artist.placeOfBirth}"
             android:textAllCaps="false"
-            />
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/artistImageView"
+            app:layout_constraintTop_toBottomOf="@+id/placeOfBirthView"
+            tools:text="ARTIST PLACE OF BIRTH" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
