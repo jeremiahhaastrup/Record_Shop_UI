@@ -18,6 +18,7 @@ public class Converter {
             return 0;
         }
     }
+
     @InverseMethod("stringToIntDisplay")
     public static String intToStringDisplay(int value) {
         return String.valueOf(value);
