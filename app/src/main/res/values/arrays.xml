@@ -2,49 +2,49 @@
 <resources>
     <string-array name="genres">
         <item>Afrobeats</item>
-        <item>Soca</item>
-        <item>R&amp;B</item>
-        <item>Hiphop</item>
-        <item>Jazz</item>
-        <item>Salsa</item>
-        <item>Blues</item>
-        <item>Latin Alternative</item>
-        <item>Rock</item>
-        <item>Pop</item>
-        <item>Classical</item>
-        <item>Reggae</item>
-        <item>Dancehall</item>
-        <item>Metal</item>
-        <item>Country</item>
-        <item>Folk</item>
-        <item>Electronic</item>
-        <item>House</item>
-        <item>Techno</item>
-        <item>Disco</item>
-        <item>Gospel</item>
-        <item>Funk</item>
-        <item>Punk</item>
-        <item>Indie</item>
-        <item>Grunge</item>
-        <item>Kpop</item>
-        <item>Trap</item>
-        <item>Drum &amp; Bass</item>
+        <item>Alternative Rock</item>
         <item>Ambient</item>
+        <item>Bhangra</item>
+        <item>Blues</item>
+        <item>Classical</item>
+        <item>Country</item>
+        <item>Cumbia</item>
+        <item>Dancehall</item>
+        <item>Disco</item>
+        <item>Drum &amp; Bass</item>
         <item>Dubstep</item>
         <item>Edm</item>
-        <item>Synthpop</item>
-        <item>Opera</item>
-        <item>Swing</item>
-        <item>Trance</item>
-        <item>Ska</item>
-        <item>World Music</item>
-        <item>New Wave</item>
-        <item>Alternative Rock</item>
-        <item>Psychedelic</item>
-        <item>Progressive Rock</item>
-        <item>Post Rock</item>
+        <item>Electronic</item>
+        <item>Folk</item>
+        <item>Funk</item>
+        <item>Gospel</item>
+        <item>Grunge</item>
+        <item>Hiphop</item>
+        <item>House</item>
+        <item>Indie</item>
+        <item>Jazz</item>
+        <item>Kpop</item>
+        <item>Latin Alternative</item>
         <item>Lofi Hiphop</item>
-        <item>Cumbia</item>
-        <item>Bhangra</item>
+        <item>Metal</item>
+        <item>New Wave</item>
+        <item>Opera</item>
+        <item>Pop</item>
+        <item>Post Rock</item>
+        <item>Progressive Rock</item>
+        <item>Psychedelic</item>
+        <item>Punk</item>
+        <item>R&amp;B</item>
+        <item>Reggae</item>
+        <item>Rock</item>
+        <item>Salsa</item>
+        <item>Ska</item>
+        <item>Soca</item>
+        <item>Swing</item>
+        <item>Synthpop</item>
+        <item>Techno</item>
+        <item>Trance</item>
+        <item>Trap</item>
+        <item>World Music</item>
     </string-array>
 </resources>
