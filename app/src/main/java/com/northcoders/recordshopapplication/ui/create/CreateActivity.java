@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -54,24 +53,26 @@ public class CreateActivity extends AppCompatActivity {
     private ActivityCreateBinding activityCreateBinding;
     private CreateClickHandlers createClickHandlers;
     private Album album;
+    private Artist artist;
     private ArrayList<Artist> artists;
     private ArrayList<Artist> artistNames;
     private MainActivityAlbumViewModel mainActivityAlbumViewModel;
     private MainActivityArtistViewModel mainActivityArtistViewModel;
-    private TextView releaseDateText;
-    private Button releaseDateButton, changeAlbumCoverButton, submitAlbumButton;
+    private TextView releaseDateText, artistDateOfBirthText;
+    private Button releaseDateButton, changeAlbumCoverButton, submitAlbumButton, artistDateOfBirthButton, changeArtistButton, submitArtistButton;
     private AutoCompleteTextView genreDropdownMenu, artistDropdownMenu;
     private LinearLayout albumLayout, artistLayout;
     private SwitchCompat switchCompat;
-    private String path;
+    private String albumPath;
+    private String artistPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
-        EdgeToEdge.enable(this);
 
         album = new Album();
+        artist = new Artist();
         artistNames = new ArrayList<>();
 
         activityCreateBinding = DataBindingUtil.setContentView(this, R.layout.activity_create);
@@ -85,6 +86,7 @@ public class CreateActivity extends AppCompatActivity {
 
         createClickHandlers = new CreateClickHandlers(album, this);
         activityCreateBinding.setAlbum(album);
+        activityCreateBinding.setArtist(artist);
         activityCreateBinding.setClickHandler(createClickHandlers);
 
         releaseDateText = findViewById(R.id.albumReleaseDate);
@@ -125,7 +127,7 @@ public class CreateActivity extends AppCompatActivity {
                             fos.flush();
                             fos.close();
 
-                            path = tempFile.getAbsolutePath();
+                            albumPath = tempFile.getAbsolutePath();
                         } catch (IOException e) {
                             Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
                         }
@@ -166,7 +168,36 @@ public class CreateActivity extends AppCompatActivity {
                         album.getGenre()
                 );
 
-                mainActivityAlbumViewModel.addAlbum(newAlbum, new File(path));
+                mainActivityAlbumViewModel.addAlbum(newAlbum, new File(albumPath));
+                this.startActivity(intent);
+            }
+        });
+
+        submitArtistButton = findViewById(R.id.submitArtistButton);
+
+        submitArtistButton.setOnClickListener(v -> {
+
+            if (artist.getName() == null) {
+                Toast.makeText(this, "Artist Name Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (artist.getDateOfBirth() == null) {
+                Toast.makeText(this, "Artist Date of Birth Cannot Be Empty. Select or Create a New Artist If Not Available", Toast.LENGTH_SHORT).show();
+            } else if (artist.getPlaceOfBirth() == null) {
+                Toast.makeText(this, "Artist Place of Birth Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (artist.getBiography() == null) {
+                Toast.makeText(this, "Artist Biography Cannot Be Empty ", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+
+                Artist newArtist = new Artist(
+                        artist.getName(),
+                        artist.getImageUrl(),
+                        artist.getBiography(),
+                        artist.getArtist_id(),
+                        artist.getDateOfBirth(),
+                        artist.getPlaceOfBirth()
+                );
+
+                mainActivityArtistViewModel.addArtist(newArtist, new File(artistPath));
                 this.startActivity(intent);
             }
         });
