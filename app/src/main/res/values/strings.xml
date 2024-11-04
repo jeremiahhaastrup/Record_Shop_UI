@@ -28,4 +28,6 @@
     <string name="back_home">Back Home</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="delete_album_button">Delete Album Button</string>
+    <string name="back_to_album">Back to Album</string>
 </resources>
