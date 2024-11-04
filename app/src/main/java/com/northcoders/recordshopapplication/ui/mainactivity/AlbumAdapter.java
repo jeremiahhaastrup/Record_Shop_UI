@@ -20,9 +20,9 @@ import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
-    private List<Album> albumList;
     private final Context context;
     private final RecyclerViewInterface recyclerViewInterface;
+    private List<Album> albumList;
 
     public AlbumAdapter(List<Album> albumList, Context context, RecyclerViewInterface recyclerViewInterface) {
         this.albumList = albumList;

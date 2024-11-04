@@ -56,7 +56,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     }
 
     public static class ArtistViewHolder extends RecyclerView.ViewHolder {
-        private ArtistViewBinding artistViewBinding;
+        private final ArtistViewBinding artistViewBinding;
 
         public ArtistViewHolder(ArtistViewBinding artistViewBinding) {
             super(artistViewBinding.getRoot());
