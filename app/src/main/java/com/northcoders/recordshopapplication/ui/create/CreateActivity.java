@@ -237,10 +237,10 @@ public class CreateActivity extends AppCompatActivity {
                 Artist newArtist = new Artist(
                         artist.getName(),
                         artist.getImageUrl(),
-                        artist.getBiography(),
-                        artist.getArtist_id(),
                         artist.getDateOfBirth(),
-                        artist.getPlaceOfBirth()
+                        artist.getArtist_id(),
+                        artist.getPlaceOfBirth(),
+                        artist.getBiography()
                 );
 
                 mainActivityArtistViewModel.addArtist(newArtist, new File(artistPath));
