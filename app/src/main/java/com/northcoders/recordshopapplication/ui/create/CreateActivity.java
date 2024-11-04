@@ -173,6 +173,42 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+        changeArtistButton = findViewById(R.id.changeArtistButton);
+
+        changeArtistButton.setOnClickListener(v ->
+                photoPickerLauncher.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                        .build())
+        );
+
+        photoPickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.PickVisualMedia(),
+                uri -> {
+                    if (uri != null) {
+                        try {
+                            InputStream inputStream = getContentResolver().openInputStream(uri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            activityCreateBinding.addArtistImageView.setImageBitmap(bitmap);
+                            inputStream.close();
+
+                            String mimeType = getContentResolver().getType(uri);
+                            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+
+                            File tempFile = new File(getCacheDir(), "file." + extension);
+                            Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
+                            FileOutputStream fos = new FileOutputStream(tempFile);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.flush();
+                            fos.close();
+
+                            artistPath = tempFile.getAbsolutePath();
+                        } catch (IOException e) {
+                            Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
         submitArtistButton = findViewById(R.id.submitArtistButton);
 
         submitArtistButton.setOnClickListener(v -> {
