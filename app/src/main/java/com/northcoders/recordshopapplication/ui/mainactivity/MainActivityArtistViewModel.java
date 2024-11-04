@@ -9,11 +9,12 @@ import androidx.lifecycle.LiveData;
 import com.northcoders.recordshopapplication.model.Artist;
 import com.northcoders.recordshopapplication.repository.ArtistRepository;
 
+import java.io.File;
 import java.util.List;
 
 public class MainActivityArtistViewModel extends AndroidViewModel {
 
-    private ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
     public MainActivityArtistViewModel(@NonNull Application application) {
         super(application);
@@ -22,5 +23,9 @@ public class MainActivityArtistViewModel extends AndroidViewModel {
 
     public LiveData<List<Artist>> getAllArtists() {
         return artistRepository.getMutableLiveData();
+    }
+
+    public void addArtist(Artist artist, File file) {
+        artistRepository.addArtist(artist, file);
     }
 }
