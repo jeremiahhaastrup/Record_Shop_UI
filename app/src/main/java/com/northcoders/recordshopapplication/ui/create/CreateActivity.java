@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -30,6 +33,7 @@ import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityCreateBinding;
 import com.northcoders.recordshopapplication.model.Album;
 import com.northcoders.recordshopapplication.model.Artist;
+import com.northcoders.recordshopapplication.ui.edit.EditAlbumActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityArtistViewModel;
@@ -45,7 +49,6 @@ import java.util.List;
 
 public class CreateActivity extends AppCompatActivity {
 
-    ActivityResultLauncher<PickVisualMediaRequest> photoPickerLauncher;
     Calendar calendar = Calendar.getInstance();
     int mYear = calendar.get(Calendar.YEAR);
     int mMonth = calendar.get(Calendar.MONTH);
@@ -101,40 +104,12 @@ public class CreateActivity extends AppCompatActivity {
 
         changeAlbumCoverButton = findViewById(R.id.changeAlbumCoverView);
 
-        changeAlbumCoverButton.setOnClickListener(v ->
-                photoPickerLauncher.launch(new PickVisualMediaRequest.Builder()
-                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                        .build())
-        );
-
-        photoPickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.PickVisualMedia(),
-                uri -> {
-                    if (uri != null) {
-                        try {
-                            InputStream inputStream = getContentResolver().openInputStream(uri);
-                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            activityCreateBinding.addAlbumCoverView.setImageBitmap(bitmap);
-                            inputStream.close();
-
-                            String mimeType = getContentResolver().getType(uri);
-                            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-
-                            File tempFile = new File(getCacheDir(), "file." + extension);
-                            Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
-                            FileOutputStream fos = new FileOutputStream(tempFile);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            fos.flush();
-                            fos.close();
-
-                            albumPath = tempFile.getAbsolutePath();
-                        } catch (IOException e) {
-                            Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-        );
-
+        changeAlbumCoverButton.setOnClickListener(v -> {
+                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    intent.setType("image/*");
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    albumPhotoPickerLauncher.launch(intent);
+                });
 
         submitAlbumButton = findViewById(R.id.submitAlbumButton);
 
@@ -185,39 +160,12 @@ public class CreateActivity extends AppCompatActivity {
 
         changeArtistButton = findViewById(R.id.changeArtistButton);
 
-        changeArtistButton.setOnClickListener(v ->
-                photoPickerLauncher.launch(new PickVisualMediaRequest.Builder()
-                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                        .build())
-        );
-
-        photoPickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.PickVisualMedia(),
-                uri -> {
-                    if (uri != null) {
-                        try {
-                            InputStream inputStream = getContentResolver().openInputStream(uri);
-                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            activityCreateBinding.addArtistImageView.setImageBitmap(bitmap);
-                            inputStream.close();
-
-                            String mimeType = getContentResolver().getType(uri);
-                            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-
-                            File tempFile = new File(getCacheDir(), "file." + extension);
-                            Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
-                            FileOutputStream fos = new FileOutputStream(tempFile);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            fos.flush();
-                            fos.close();
-
-                            artistPath = tempFile.getAbsolutePath();
-                        } catch (IOException e) {
-                            Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-        );
+        changeArtistButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.setType("image/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            artistPhotoPickerLauncher.launch(intent);
+        });
 
         submitArtistButton = findViewById(R.id.submitArtistButton);
 
@@ -252,6 +200,76 @@ public class CreateActivity extends AppCompatActivity {
         initialiseGenreDropdownMenu();
         initialiseArtistDropdownMenu();
     }
+
+    ActivityResultLauncher<Intent> albumPhotoPickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == EditAlbumActivity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri uri = data.getData();
+                        if (uri != null) {
+                            try {
+                                InputStream inputStream = getContentResolver().openInputStream(uri);
+                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                                activityCreateBinding.addAlbumCoverView.setImageBitmap(bitmap);
+                                inputStream.close();
+
+                                String mimeType = getContentResolver().getType(uri);
+                                String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+
+                                File tempFile = new File(getCacheDir(), "file." + extension);
+                                Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
+                                FileOutputStream fos = new FileOutputStream(tempFile);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                                fos.flush();
+                                fos.close();
+
+                                albumPath = tempFile.getAbsolutePath();
+                            } catch (IOException e) {
+                                Toast.makeText(CreateActivity.this, "Unable to load image", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+            }
+    );
+
+    ActivityResultLauncher<Intent> artistPhotoPickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == EditAlbumActivity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri uri = data.getData();
+                        if (uri != null) {
+                            try {
+                                InputStream inputStream = getContentResolver().openInputStream(uri);
+                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                                activityCreateBinding.addArtistImageView.setImageBitmap(bitmap);
+                                inputStream.close();
+
+                                String mimeType = getContentResolver().getType(uri);
+                                String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+
+                                File tempFile = new File(getCacheDir(), "file." + extension);
+                                Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
+                                FileOutputStream fos = new FileOutputStream(tempFile);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                                fos.flush();
+                                fos.close();
+
+                                artistPath = tempFile.getAbsolutePath();
+                            } catch (IOException e) {
+                                Toast.makeText(CreateActivity.this, "Unable to load image", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+            }
+    );
 
     private void initialiseGenreDropdownMenu() {
         genreDropdownMenu = activityCreateBinding.genreDropdown;
