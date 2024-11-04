@@ -11,8 +11,8 @@ import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 
 public class CreateClickHandlers {
 
-    private Album album;
-    private Context context;
+    private final Album album;
+    private final Context context;
 
     public CreateClickHandlers(Album album, Context context) {
         this.album = album;
