@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +17,9 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -44,7 +46,6 @@ import java.util.List;
 public class EditAlbumActivity extends AppCompatActivity {
 
     private static final String ALBUM_KEY = "album";
-    ActivityResultLauncher<PickVisualMediaRequest> photoPickerLauncher;
     Calendar calendar = Calendar.getInstance();
     int mYear = calendar.get(Calendar.YEAR);
     int mMonth = calendar.get(Calendar.MONTH);
@@ -98,41 +99,14 @@ public class EditAlbumActivity extends AppCompatActivity {
 
         changeAlbumCoverButton = findViewById(R.id.changeAlbumCoverView);
 
-        changeAlbumCoverButton.setOnClickListener(v ->
-                photoPickerLauncher.launch(new PickVisualMediaRequest.Builder()
-                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                        .build())
-        );
+        changeAlbumCoverButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.setType("image/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            photoPickerLauncher.launch(intent);
+        });
 
         path = album.getImageUrl();
-
-        photoPickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.PickVisualMedia(),
-                uri -> {
-                    if (uri != null) {
-                        try {
-                            InputStream inputStream = getContentResolver().openInputStream(uri);
-                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            activityEditAlbumBinding.addAlbumCoverView.setImageBitmap(bitmap);
-                            inputStream.close();
-
-                            String mimeType = getContentResolver().getType(uri);
-                            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-
-                            File tempFile = new File(getCacheDir(), "file." + extension);
-                            Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
-                            FileOutputStream fos = new FileOutputStream(tempFile);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            fos.flush();
-                            fos.close();
-
-                            newPath = tempFile.getAbsolutePath();
-                        } catch (IOException e) {
-                            Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-        );
 
         updateAlbumButton = findViewById(R.id.updateAlbumButton);
 
@@ -160,7 +134,7 @@ public class EditAlbumActivity extends AppCompatActivity {
                         album.getStock(),
                         album.getTitle(),
                         0,
-                        album.getImageUrl(),
+                        newPath != null ? newPath : album.getImageUrl(),
                         album.getDescription(),
                         album.getReleaseDate(),
                         album.getArtist(),
@@ -175,6 +149,41 @@ public class EditAlbumActivity extends AppCompatActivity {
         initialiseGenreDropdownMenu();
         initialiseArtistDropdownMenu();
     }
+
+    ActivityResultLauncher<Intent> photoPickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == EditAlbumActivity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri uri = data.getData();
+                        if (uri != null) {
+                            try {
+                                InputStream inputStream = getContentResolver().openInputStream(uri);
+                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                                activityEditAlbumBinding.addAlbumCoverView.setImageBitmap(bitmap);
+                                inputStream.close();
+
+                                String mimeType = getContentResolver().getType(uri);
+                                String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+
+                                File tempFile = new File(getCacheDir(), "file." + extension);
+                                Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
+                                FileOutputStream fos = new FileOutputStream(tempFile);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                                fos.flush();
+                                fos.close();
+
+                                newPath = tempFile.getAbsolutePath();
+                            } catch (IOException e) {
+                                Toast.makeText(EditAlbumActivity.this, "Unable to load image", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+            }
+    );
 
     private void openDatePickerDialog() {
         DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
