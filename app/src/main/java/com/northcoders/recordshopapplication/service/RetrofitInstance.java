@@ -9,8 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
 
-    private static Retrofit retrofit = null;
     private static final String BASE_URL = BuildConfig.API_URL;
+    private static Retrofit retrofit = null;
 
     public static AlbumApiService getService() {
 
