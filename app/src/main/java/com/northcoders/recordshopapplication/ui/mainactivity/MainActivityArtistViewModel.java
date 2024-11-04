@@ -33,4 +33,7 @@ public class MainActivityArtistViewModel extends AndroidViewModel {
         artistRepository.updateArtist(id, artist, file);
     }
 
+    public void deleteArtist(long id) {
+        artistRepository.deleteArtist(id);
+    }
 }
