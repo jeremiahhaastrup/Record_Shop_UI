@@ -23,8 +23,8 @@ import retrofit2.Response;
 
 public class AlbumRepository {
 
-    private MutableLiveData<List<Album>> mutableLiveData = new MutableLiveData<>();
-    private Application application;
+    private final MutableLiveData<List<Album>> mutableLiveData = new MutableLiveData<>();
+    private final Application application;
 
     public AlbumRepository(Application application) {
         this.application = application;
@@ -34,7 +34,7 @@ public class AlbumRepository {
         AlbumApiService albumApiService = RetrofitInstance.getService();
         Call<List<Album>> call = albumApiService.getAllAlbums();
 
-        call.enqueue(new Callback<List<Album>>(){
+        call.enqueue(new Callback<List<Album>>() {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 List<Album> albums = response.body();

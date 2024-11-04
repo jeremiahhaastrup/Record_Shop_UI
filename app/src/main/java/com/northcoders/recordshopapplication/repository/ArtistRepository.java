@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 import com.northcoders.recordshopapplication.model.Artist;
-import com.northcoders.recordshopapplication.model.Artist;
 import com.northcoders.recordshopapplication.service.AlbumApiService;
 import com.northcoders.recordshopapplication.service.RetrofitInstance;
 
@@ -24,8 +23,8 @@ import retrofit2.Response;
 
 public class ArtistRepository {
 
-    private MutableLiveData<List<Artist>> mutableLiveData = new MutableLiveData<>();
-    private Application application;
+    private final MutableLiveData<List<Artist>> mutableLiveData = new MutableLiveData<>();
+    private final Application application;
 
     public ArtistRepository(Application application) {
         this.application = application;
@@ -35,7 +34,7 @@ public class ArtistRepository {
         AlbumApiService albumApiService = RetrofitInstance.getService();
         Call<List<Artist>> call = albumApiService.getAllArtists();
 
-        call.enqueue(new Callback<List<Artist>>(){
+        call.enqueue(new Callback<List<Artist>>() {
             @Override
             public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
                 List<Artist> artists = response.body();
