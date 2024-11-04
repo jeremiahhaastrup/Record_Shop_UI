@@ -75,5 +75,35 @@ public class EditArtistActivity extends AppCompatActivity {
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.error)
                 .into(activityEditArtistBinding.addArtistImageView);
+
+        updateArtistButton = findViewById(R.id.updateArtistButton);
+
+        updateArtistButton.setOnClickListener(v -> {
+            File newFileToUpload = newPath != null ? new File(newPath) : null;
+
+            if (artist.getName() == null) {
+                Toast.makeText(this, "Artist Name Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (artist.getDateOfBirth() == null) {
+                Toast.makeText(this, "Artist Date of Birth Cannot Be Empty. Select or Create a New Artist If Not Available", Toast.LENGTH_SHORT).show();
+            } else if (artist.getPlaceOfBirth() == null) {
+                Toast.makeText(this, "Artist Place of Birth Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            } else if (artist.getBiography() == null) {
+                Toast.makeText(this, "Artist Biography Cannot Be Empty ", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+
+                Artist newArtist = new Artist(
+                        artist.getName(),
+                        artist.getImageUrl(),
+                        artist.getBiography(),
+                        artist.getArtist_id(),
+                        artist.getDateOfBirth(),
+                        artist.getPlaceOfBirth()
+                );
+
+                mainActivityArtistViewModel.updateArtist(newArtist.getArtist_id(), newArtist, newFileToUpload);
+                this.startActivity(intent);
+            }
+        });
     }
 }
