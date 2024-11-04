@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MainActivityAlbumViewModel extends AndroidViewModel {
 
-    private AlbumRepository albumRepository;
+    private final AlbumRepository albumRepository;
 
     public MainActivityAlbumViewModel(@NonNull Application application) {
         super(application);
@@ -30,7 +30,7 @@ public class MainActivityAlbumViewModel extends AndroidViewModel {
     }
 
     public void updateAlbum(long id, Album album, File file) {
-        if (file != null){
+        if (file != null) {
             albumRepository.updateAlbum(id, album, file);
         } else {
             albumRepository.updateAlbum(id, album, null);
