@@ -1,13 +1,10 @@
 package com.northcoders.recordshopapplication.ui.overview;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 
 import com.northcoders.recordshopapplication.model.Artist;
-import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityArtistViewModel;
 
 public class ArtistOverviewClickHandler {

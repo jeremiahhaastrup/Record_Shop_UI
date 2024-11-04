@@ -16,7 +16,6 @@ import com.northcoders.recordshopapplication.R;
 import com.northcoders.recordshopapplication.databinding.ActivityArtistOverviewBinding;
 import com.northcoders.recordshopapplication.model.Artist;
 import com.northcoders.recordshopapplication.ui.edit.EditArtistActivity;
-import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityArtistViewModel;
 
 public class ArtistOverviewActivity extends AppCompatActivity {
