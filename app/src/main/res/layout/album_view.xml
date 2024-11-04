@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="album"
             type="com.northcoders.recordshopapplication.model.Album" />
@@ -13,80 +14,75 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        >
+        android:paddingBottom="20dp">
 
         <ImageView
             android:id="@+id/albumCoverView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="H,1:1"
             android:layout_marginStart="20dp"
             android:contentDescription="@{@string/albumCover(album.title)}"
+            android:src="@{album.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintEnd_toStartOf="@+id/titleView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background"
-            android:src="@{album.imageUrl}"
-                />
+            app:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/titleView"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="@{album.title}"
-            tools:text="TITLE"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/albumCoverView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="2sp"
             android:layout_marginStart="10sp"
-            android:textSize="17sp"
+            android:layout_marginTop="2sp"
             android:layout_marginEnd="100sp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{album.title}"
             android:textAllCaps="false"
-             />
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/albumCoverView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TITLE" />
 
         <TextView
             android:id="@+id/artistNameView"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="@{album.artist.name}"
-            tools:text="ARTIST NAME"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/albumCoverView"
-            app:layout_constraintTop_toBottomOf="@+id/titleView"
-            android:layout_marginTop="5sp"
             android:layout_marginStart="10sp"
-            android:textSize="14sp"
+            android:layout_marginTop="5sp"
             android:layout_marginEnd="100sp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{album.artist.name}"
             android:textAllCaps="false"
-            />
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/albumCoverView"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            tools:text="ARTIST NAME" />
 
         <TextView
             android:id="@+id/genreView"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="@{@string/genreView(album.genre)}"
-            tools:text="GENRE"
-            android:textColor="@color/light_grey"
-            app:layout_constraintStart_toEndOf="@+id/albumCoverView"
-            app:layout_constraintTop_toBottomOf="@+id/artistNameView"
-            android:layout_marginBottom="5sp"
-            android:layout_marginTop="5sp"
-            android:textStyle="italic"
             android:layout_marginStart="10sp"
-            android:textSize="15sp"
+            android:layout_marginTop="5sp"
             android:layout_marginEnd="100sp"
+            android:layout_marginBottom="5sp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{@string/genreView(album.genre)}"
             android:textAllCaps="false"
-            />
+            android:textColor="@color/light_grey"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@+id/albumCoverView"
+            app:layout_constraintTop_toBottomOf="@+id/artistNameView"
+            tools:text="GENRE" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
