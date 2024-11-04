@@ -45,6 +45,10 @@ public class EditAlbumActivity extends AppCompatActivity {
 
     private static final String ALBUM_KEY = "album";
     ActivityResultLauncher<PickVisualMediaRequest> photoPickerLauncher;
+    Calendar calendar = Calendar.getInstance();
+    int mYear = calendar.get(Calendar.YEAR);
+    int mMonth = calendar.get(Calendar.MONTH);
+    int mDay = calendar.get(Calendar.DAY_OF_MONTH);
     private ActivityEditAlbumBinding activityEditAlbumBinding;
     private Album album;
     private EditAlbumClickHandler handler;
@@ -55,12 +59,8 @@ public class EditAlbumActivity extends AppCompatActivity {
     private AutoCompleteTextView genreDropdownMenu, artistDropdownMenu;
     private MainActivityArtistViewModel mainActivityArtistViewModel;
     private MainActivityAlbumViewModel mainActivityAlbumViewModel;
-    Calendar calendar = Calendar.getInstance();
     private ArrayList<Artist> artists;
     private ArrayList<Artist> artistNames;
-    int mYear = calendar.get(Calendar.YEAR);
-    int mMonth = calendar.get(Calendar.MONTH);
-    int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
     @SuppressLint("NewApi")
     @Override

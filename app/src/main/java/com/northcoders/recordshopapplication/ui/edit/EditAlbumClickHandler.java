@@ -12,9 +12,9 @@ import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumVi
 import com.northcoders.recordshopapplication.ui.overview.AlbumOverviewActivity;
 
 public class EditAlbumClickHandler {
-    private Album album;
-    private Context context;
-    private MainActivityAlbumViewModel mainActivityAlbumViewModel;
+    private final Album album;
+    private final Context context;
+    private final MainActivityAlbumViewModel mainActivityAlbumViewModel;
     private long albumId;
 
     public EditAlbumClickHandler(Album album, Context context, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
