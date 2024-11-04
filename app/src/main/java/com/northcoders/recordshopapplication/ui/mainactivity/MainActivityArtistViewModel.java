@@ -28,4 +28,9 @@ public class MainActivityArtistViewModel extends AndroidViewModel {
     public void addArtist(Artist artist, File file) {
         artistRepository.addArtist(artist, file);
     }
+
+    public void updateArtist(long id, Artist artist, File file) {
+        artistRepository.updateArtist(id, artist, file);
+    }
+
 }
