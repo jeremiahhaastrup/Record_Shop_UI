@@ -2,7 +2,6 @@ package com.northcoders.recordshopapplication.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -12,30 +11,33 @@ import com.google.gson.annotations.SerializedName;
 import com.northcoders.recordshopapplication.BR;
 
 public class Album extends BaseObservable implements Parcelable {
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
     @SerializedName("album_id")
     private int album_id;
-
     @SerializedName("title")
     private String title;
-
     @SerializedName("stock")
     private int stock;
-
     @SerializedName("sales")
     private int sales;
-
     @SerializedName("imageUrl")
     private String imageUrl;
-
     @SerializedName("description")
     private String description;
-
     @SerializedName("releaseDate")
     private String releaseDate;
-
     @SerializedName("genre")
     private String genre;
-
     @SerializedName("artist")
     private Artist artist;
 
@@ -65,18 +67,6 @@ public class Album extends BaseObservable implements Parcelable {
         artist = in.readParcelable(Artist.class.getClassLoader());
         genre = in.readString();
     }
-
-    public static final Creator<Album> CREATOR = new Creator<Album>() {
-        @Override
-        public Album createFromParcel(Parcel in) {
-            return new Album(in);
-        }
-
-        @Override
-        public Album[] newArray(int size) {
-            return new Album[size];
-        }
-    };
 
     @Bindable
     public int getAlbum_id() {

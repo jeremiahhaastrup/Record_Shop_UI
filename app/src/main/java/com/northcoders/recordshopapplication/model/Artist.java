@@ -12,21 +12,27 @@ import com.northcoders.recordshopapplication.BR;
 
 public class Artist extends BaseObservable implements Parcelable {
 
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        @Override
+        public Artist createFromParcel(Parcel in) {
+            return new Artist(in);
+        }
+
+        @Override
+        public Artist[] newArray(int size) {
+            return new Artist[size];
+        }
+    };
     @SerializedName("artist_id")
     private int artist_id;
-
     @SerializedName("name")
     private String name;
-
     @SerializedName("imageUrl")
     private String imageUrl;
-
     @SerializedName("biography")
     private String biography;
-
     @SerializedName("dateOfBirth")
     private String dateOfBirth;
-
     @SerializedName("placeOfBirth")
     private String placeOfBirth;
 
@@ -50,18 +56,6 @@ public class Artist extends BaseObservable implements Parcelable {
         dateOfBirth = in.readString();
         placeOfBirth = in.readString();
     }
-
-    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
-        @Override
-        public Artist createFromParcel(Parcel in) {
-            return new Artist(in);
-        }
-
-        @Override
-        public Artist[] newArray(int size) {
-            return new Artist[size];
-        }
-    };
 
     @Bindable
     public int getArtist_id() {
