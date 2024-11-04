@@ -135,7 +135,7 @@ public class CreateActivity extends AppCompatActivity {
                         album.getStock(),
                         album.getTitle(),
                         0,
-                        album.getImageUrl(),
+                        albumPath != null ? albumPath : album.getImageUrl(),
                         album.getDescription(),
                         album.getReleaseDate(),
                         album.getArtist(),
@@ -183,7 +183,7 @@ public class CreateActivity extends AppCompatActivity {
 
                 Artist newArtist = new Artist(
                         artist.getName(),
-                        artist.getImageUrl(),
+                        artistPath != null ? artistPath : artist.getImageUrl(),
                         artist.getDateOfBirth(),
                         artist.getArtist_id(),
                         artist.getPlaceOfBirth(),
