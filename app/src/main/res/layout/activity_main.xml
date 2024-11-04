@@ -1,182 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="addAlbumHandler"
             type="com.northcoders.recordshopapplication.ui.mainactivity.MainActivityClickHandler" />
     </data>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/my_drawer_layout"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/my_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="40dp"
+        tools:context=".MainActivity"
+        tools:ignore="HardcodedText">
+
+        <LinearLayout
+            android:id="@+id/searchLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".MainActivity"
-            tools:ignore="HardcodedText"
-            android:paddingTop="40dp"
-            >
-            <LinearLayout
-                android:id="@+id/searchLayout"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <SearchView
+                android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/search_view_background"
+                android:queryHint="Search Item..."
+                android:visibility="visible" />
 
-                <SearchView
-                    android:id="@+id/search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="30dp"
-                    android:background="@drawable/search_view_background"
-                    android:queryHint="Search Item..."
-                    android:visibility="visible"
-                    />
+        </LinearLayout>
 
-            </LinearLayout>
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingTop="10dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchLayout">
 
-            <HorizontalScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/main"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               app:layout_constraintTop_toBottomOf="@+id/searchLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_margin="10dp"
-                android:paddingTop="10dp"
-                android:scrollbars="none"
-                >
+                android:fitsSystemWindows="true"
+                tools:context=".ui.mainactivity.MainActivity">
 
-                <LinearLayout
-                    android:id="@+id/main"
+                <Button
+                    android:id="@+id/all"
+                    style="@style/BtnGenreStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:context=".ui.mainactivity.MainActivity"
-                    android:fitsSystemWindows="true"
-                >
-                    <Button
-                        android:id="@+id/all"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="All"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/afrobeats"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Afrobeats"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/rAndB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R&amp;B"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/hiphop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hip-Hop"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/jazz"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Jazz"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/salsa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Salsa"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/house"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="House"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/drumAndBass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Drum &amp; Bass"
-                        style="@style/BtnGenreStyle"
-                        />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
-                    <Button
-                        android:id="@+id/classical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Classical"
-                        style="@style/BtnGenreStyle"
-                        />
+                    android:text="All" />
 
-                </LinearLayout>
-            </HorizontalScrollView>
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RecyclerView"
-                    app:layout_constraintTop_toBottomOf="@+id/scrollView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0sp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15sp"
-                    android:layout_marginEnd="15sp"
-                    app:layout_constraintBottom_toTopOf="@+id/bottomNavigationHome"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:listitem="@layout/album_view"
-                    />
+                <Button
+                    android:id="@+id/afrobeats"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Afrobeats" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationHome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/RecyclerView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:menu="@menu/navigation_menu"
-                app:labelVisibilityMode="labeled"
-                style="@style/CustomBottomNavigationView"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
+
+                <Button
+                    android:id="@+id/rAndB"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R&amp;B" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
+
+                <Button
+                    android:id="@+id/hiphop"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hip-Hop" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
+
+                <Button
+                    android:id="@+id/jazz"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jazz" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
+
+                <Button
+                    android:id="@+id/salsa"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salsa" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
+
+                <Button
+                    android:id="@+id/house"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="House" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
+
+                <Button
+                    android:id="@+id/drumAndBass"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Drum &amp; Bass" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="0dp" />
+
+                <Button
+                    android:id="@+id/classical"
+                    style="@style/BtnGenreStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Classical" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView"
+            tools:listitem="@layout/album_view" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationHome"
+            style="@style/CustomBottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RecyclerView"
+            app:menu="@menu/navigation_menu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
