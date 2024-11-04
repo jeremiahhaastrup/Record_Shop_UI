@@ -309,7 +309,7 @@
                             />
 
                         <Button
-                            android:id="@+id/changeArtistImageView"
+                            android:id="@+id/changeArtistButton"
                             android:text="@string/change_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
