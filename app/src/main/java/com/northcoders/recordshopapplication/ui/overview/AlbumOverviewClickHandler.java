@@ -1,21 +1,18 @@
 package com.northcoders.recordshopapplication.ui.overview;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 
 import com.northcoders.recordshopapplication.model.Album;
-import com.northcoders.recordshopapplication.ui.edit.EditAlbumActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivity;
 import com.northcoders.recordshopapplication.ui.mainactivity.MainActivityAlbumViewModel;
 
 public class AlbumOverviewClickHandler {
 
-    private Context context;
-    private Album album;
-    private MainActivityAlbumViewModel mainActivityAlbumViewModel;
+    private final Context context;
+    private final Album album;
+    private final MainActivityAlbumViewModel mainActivityAlbumViewModel;
 
     public AlbumOverviewClickHandler(Context context, Album album, MainActivityAlbumViewModel mainActivityAlbumViewModel) {
         this.context = context;
@@ -25,11 +22,6 @@ public class AlbumOverviewClickHandler {
 
     public void onBackHomeBtnClicked(View view) {
         Intent intent = new Intent(view.getContext(), MainActivity.class);
-        context.startActivity(intent);
-    }
-
-    public void onArtistBtnClicked(View view) {
-        Intent intent = new Intent(view.getContext(), ArtistOverviewActivity.class);
         context.startActivity(intent);
     }
 }
