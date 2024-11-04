@@ -76,6 +76,16 @@ public class EditArtistActivity extends AppCompatActivity {
                 .error(R.drawable.error)
                 .into(activityEditArtistBinding.addArtistImageView);
 
+        artistDateOfBirthButton = findViewById(R.id.artistDateOfBirthButton);
+        artistPlaceOfBirthText = findViewById(R.id.artistPlaceOfBirth);
+
+        artistDateOfBirthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBirthDatePickerDialog();
+            }
+        });
+
         changeArtistImageButton = findViewById(R.id.changeArtistImageButton);
 
         changeArtistImageButton.setOnClickListener(v ->
@@ -143,5 +153,15 @@ public class EditArtistActivity extends AppCompatActivity {
                 this.startActivity(intent);
             }
         });
+    }
+
+    private void openBirthDatePickerDialog() {
+        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                artistPlaceOfBirthText.setText(String.format("%02d/%02d/%d", dayOfMonth, month + 1, year));
+            }
+        }, mYear, mMonth, mDay);
+        dialog.show();
     }
 }
