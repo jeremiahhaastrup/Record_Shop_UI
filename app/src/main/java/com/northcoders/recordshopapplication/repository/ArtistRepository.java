@@ -88,4 +88,46 @@ public class ArtistRepository {
             }
         });
     }
+
+    public void updateArtist(long id, Artist artist, File file) {
+
+        RequestBody artistBody = RequestBody.create(new Gson().toJson(artist), MediaType.parse("application/json"));
+        MultipartBody.Part filePart = null;
+
+        if (file != null) {
+            filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(file, MediaType.parse("image/*")));
+            String fileName = file.getName();
+            if (!fileName.matches(".*\\.(jpg|jpeg|png|gif)$")) {
+                Toast.makeText(application.getApplicationContext(), "Unsupported image format", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        AlbumApiService albumApiService = RetrofitInstance.getService();
+        Call<Artist> call = albumApiService.updateArtist(id, artistBody, filePart);
+
+        call.enqueue(new Callback<Artist>() {
+            @Override
+            public void onResponse(Call<Artist> call, Response<Artist> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(application.getApplicationContext(),
+                            "Artist updated!",
+                            Toast.LENGTH_SHORT).show();
+                    Log.i("SUCCESSFUL RESPONSE", response.body().toString());
+                } else {
+                    Toast.makeText(application.getApplicationContext(),
+                            "Failed to update artist. Error: " + response.code(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Artist> call, Throwable throwable) {
+                Log.e("API Error", "Failure: " + throwable.getMessage(), throwable);
+                Toast.makeText(application.getApplicationContext(),
+                        "Artist cannot be updated!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
