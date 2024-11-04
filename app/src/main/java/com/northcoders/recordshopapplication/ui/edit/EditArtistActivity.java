@@ -76,6 +76,44 @@ public class EditArtistActivity extends AppCompatActivity {
                 .error(R.drawable.error)
                 .into(activityEditArtistBinding.addArtistImageView);
 
+        changeArtistImageButton = findViewById(R.id.changeArtistImageButton);
+
+        changeArtistImageButton.setOnClickListener(v ->
+                photoPickerLauncher.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                        .build())
+        );
+
+        path = artist.getImageUrl();
+
+        photoPickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.PickVisualMedia(),
+                uri -> {
+                    if (uri != null) {
+                        try {
+                            InputStream inputStream = getContentResolver().openInputStream(uri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            activityEditArtistBinding.addArtistImageView.setImageBitmap(bitmap);
+                            inputStream.close();
+
+                            String mimeType = getContentResolver().getType(uri);
+                            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+
+                            File tempFile = new File(getCacheDir(), "file." + extension);
+                            Log.i("Image Extension", "MIME type: " + mimeType + ", Extension: " + extension);
+                            FileOutputStream fos = new FileOutputStream(tempFile);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.flush();
+                            fos.close();
+
+                            newPath = tempFile.getAbsolutePath();
+                        } catch (IOException e) {
+                            Toast.makeText(this, "Unable to load image", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
         updateArtistButton = findViewById(R.id.updateArtistButton);
 
         updateArtistButton.setOnClickListener(v -> {
