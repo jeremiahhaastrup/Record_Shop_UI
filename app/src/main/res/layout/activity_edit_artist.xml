@@ -11,7 +11,7 @@
 
         <variable
             name="clickHandler"
-            type="com.northcoders.recordshopapplication.ui.overview.ArtistOverviewClickHandler" />
+            type="com.northcoders.recordshopapplication.ui.edit.EditArtistClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,7 +85,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
-                    android:id="@+id/changeArtistImageView"
+                    android:id="@+id/changeArtistImageButton"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -220,7 +220,8 @@
                         android:paddingVertical="15dp"
                         android:text="@string/delete"
                         android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:onClick="@{clickHandler::onDeleteArtistBtn}"/>
 
                 </LinearLayout>
 
