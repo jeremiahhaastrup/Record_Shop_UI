@@ -37,10 +37,10 @@ The application follows the MVVM architecture pattern, allowing maintainability 
 3. Build and run the project on an Android emulator or physical device.
 
 ## API Setup
-Ensure the [Record Shop API](https://github.com/jeremiahhaastrup/Record-Shop-API) is running for the app to fetch and modify data.
+Ensure the [Record Shop API](https://github.com/jeremiahhaastrup/Record_Shop_API) is running for the app to fetch and modify data.
 
 ### Steps:
-1. Set up the API by following the instructions in its [repository](https://github.com/jeremiahhaastrup/Record-Shop-API).
+1. Set up the API by following the instructions in its [repository](https://github.com/jeremiahhaastrup/Record_Shop_API).
 2. Use the API for managing albums and artists in real-time.
 
 ## License
