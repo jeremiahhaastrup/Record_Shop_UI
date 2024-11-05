@@ -119,17 +119,36 @@
                     android:textStyle="bold"
                     tools:text="Artist Place of Birth" />
 
-                <TextView
-                    android:id="@+id/dateOfBirthView"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@={artist.dateOfBirth}"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="00/00/0000" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/dateOfBirthInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dateOfBirth"
+                        android:layout_marginEnd="10dp"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="Date of Birth:" />
+
+                    <TextView
+                        android:id="@+id/dateOfBirthView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={artist.dateOfBirth}"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="00/00/00" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/description"
