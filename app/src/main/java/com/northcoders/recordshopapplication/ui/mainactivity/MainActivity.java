@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         });
         buttonHipHop.setOnClickListener(view -> {
             setSelectedButton(buttonHipHop);
-            getAllAlbumsByGenre("Hip-Hop");
+            getAllAlbumsByGenre("HipHop");
         });
         buttonRAndB.setOnClickListener(view -> {
             setSelectedButton(buttonRAndB);
